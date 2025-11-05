@@ -1,3 +1,4 @@
+/*
 import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
@@ -24,7 +25,8 @@ class _BluetoothPageState extends State<BluetoothPage> {
     _initBluetooth();
   }
 
- /* Future<void> _initBluetooth() async {
+ */
+/* Future<void> _initBluetooth() async {
     await Permission.bluetooth.request();
     await Permission.bluetoothScan.request();
     await Permission.bluetoothConnect.request();
@@ -38,7 +40,8 @@ class _BluetoothPageState extends State<BluetoothPage> {
 
     // Start discovering
     _discoverDevices();
-  }*/
+  }*//*
+
   Future<void> _initBluetooth() async {
     Map<Permission, PermissionStatus> statuses = await [
       Permission.bluetooth,
@@ -97,7 +100,8 @@ class _BluetoothPageState extends State<BluetoothPage> {
     String dataString = String.fromCharCodes(data);
     print("📥 Received Raw Data: $dataString");
 
-   /* // Optional: Clean backspaces if needed (same logic)
+   */
+/* // Optional: Clean backspaces if needed (same logic)
     int backspacesCounter = 0;
     data.forEach((byte) {
       if (byte == 8 || byte == 127) backspacesCounter++;
@@ -122,7 +126,8 @@ class _BluetoothPageState extends State<BluetoothPage> {
    // String finalString = String.fromCharCodes(buffer);
     String finalString = String.fromCharCodes(data);
     _messageBuffer += finalString;
-*/
+*//*
+
    // String finalString = String.fromCharCodes(buffer);
     String finalString = String.fromCharCodes(data);
     _messageBuffer += dataString;
@@ -171,3 +176,4 @@ class _BluetoothPageState extends State<BluetoothPage> {
     );
   }
 }
+*/

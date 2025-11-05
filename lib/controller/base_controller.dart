@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:smart_track/network/api/smart_track_repository.dart';
 
 import '../common/service_locator.dart';
 import '../common/utils/storage_service.dart';

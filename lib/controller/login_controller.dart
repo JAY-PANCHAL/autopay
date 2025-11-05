@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
+import '../common/utils/app_constants.dart';
+import '../common/utils/utility.dart';
+import 'base_controller.dart';
+
 
 class LoginController extends BaseController {
   String deviceType = "";
@@ -48,7 +52,7 @@ class LoginController extends BaseController {
     isLoading.value = true;
     await repo.login(params).then((value) async {
       isLoading.value = false;
-      if ((value.data?.length ?? 0) > 0) {
+     /* if ((value.data?.length ?? 0) > 0) {
         storageService.setString(AppConstants.tokenPr, value.data?[0].token);
         storageService.setBool(AppConstants.isLoginPref, true);
         storageService.setInt(AppConstants.userCodePr, value.data?[0].userCode);
@@ -57,7 +61,7 @@ class LoginController extends BaseController {
         Get.offAllNamed(Routes.homeScreen);
       } else {
         Utils.showToast(value.data?[0].message ?? "");
-      }
+      }*/
     }).onError((error, stackTrace) {
       isLoading.value = false;
       Utils.showToast(error.toString());

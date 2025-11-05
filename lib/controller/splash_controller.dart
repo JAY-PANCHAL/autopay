@@ -4,14 +4,17 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:smart_track/common/service_locator.dart';
-import 'package:smart_track/common/utils/dimensions.dart';
-import 'package:smart_track/common/utils/storage_service.dart';
-import 'package:smart_track/common/utils/utility.dart';
-import 'package:smart_track/controller/base_controller.dart';
-import 'package:smart_track/network/api/smart_track_repository.dart';
+
 import 'package:permission_handler/permission_handler.dart';
-import 'package:smart_track/routes/app_pages.dart';
+
+import '../common/service_locator.dart';
+import '../common/utils/dimensions.dart';
+import '../common/utils/storage_service.dart';
+import '../common/utils/utility.dart';
+import '../network/api/smart_track_repository.dart';
+import '../routes/app_pages.dart';
+import 'base_controller.dart';
+
 
 class SplashController extends BaseController {
   final repo = getIt.get<SmartTrackRepository>();
@@ -52,7 +55,7 @@ class SplashController extends BaseController {
       if (isloggedin) {
         Get.offNamedUntil(Routes.homeScreen, (route) => false);
       } else {
-        Get.offNamedUntil(Routes.login, (route) => false);
+        Get.offNamedUntil(Routes.getstarted, (route) => false);
       }
     });
   }

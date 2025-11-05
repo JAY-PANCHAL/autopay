@@ -1,3 +1,4 @@
+/*
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
@@ -40,7 +41,8 @@ class BluetoothPrinterService {
     return prefs.getString(_lastDeviceKey);
   }
 
-  /*Future<void> printMilkCollection({
+  */
+/*Future<void> printMilkCollection({
     required BuildContext context,
     required String locName,
     required String memberName,
@@ -151,7 +153,8 @@ class BluetoothPrinterService {
       receiptWidget,
       pixelRatio: 2.0,
     );
-  }*/
+  }*//*
+
 
 
 
@@ -199,10 +202,12 @@ class BluetoothPrinterService {
          27, 100, 3, // ESC d 3 – Feed 3 lines
          29, 86, 1, // GS V 1 – Partial cut
        ]));
-      /*  await _printer.writeBytes(Uint8List.fromList([
+      */
+/*  await _printer.writeBytes(Uint8List.fromList([
           27, 64,        // Reset printer
           72, 101, 108, 108, 111, 10, // Print "Hello" and LF
-        ]));*/
+        ]));*//*
+
 
         // Short delay before disconnect
      //   await Future.delayed(Duration(milliseconds: 300));
@@ -383,3 +388,4 @@ class BluetoothPrinterService {
   }
 
 }
+*/

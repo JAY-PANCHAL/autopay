@@ -1,13 +1,14 @@
+/*
 import 'package:double_tap_to_exit/double_tap_to_exit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:smart_track/common/utils/color_constants.dart';
-import 'package:smart_track/common/utils/utility.dart';
-import 'package:smart_track/controller/global_controller.dart';
-import 'package:smart_track/controller/home_controller.dart';
-import 'package:smart_track/routes/app_pages.dart';
+
+import '../../common/utils/color_constants.dart';
+import '../../common/utils/utility.dart';
+import '../../routes/app_pages.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,10 +18,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final HomeScreenController homeScreenController =
-      Get.put((HomeScreenController()));
-  GlobalController globalController =
-      Get.put(GlobalController(), permanent: true);
 
   final List<Map<String, dynamic>> badgeItems = [
     {
@@ -99,6 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: Stack(
                   alignment: Alignment.center,
                   children: [
+*/
 /*
                     Align(
                       alignment: Alignment.centerLeft,
@@ -115,7 +113,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ),
-*/
+*//*
+
                     Text(
                       "SMART TRACK",
                       style: TextStyle(
@@ -318,3 +317,4 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+*/

@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:smart_track/common/utils/strings.dart';
-import 'package:smart_track/controller/login_controller.dart';
 import '../../common/CommanTextField.dart';
 import '../../common/rounded_button.dart';
 import '../../common/utils/app_constants.dart';
 import '../../common/utils/color_constants.dart';
+import '../../common/utils/strings.dart';
 import '../../common/utils/utility.dart';
+import '../../controller/login_controller.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
