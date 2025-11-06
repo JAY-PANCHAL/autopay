@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-
 import '../common/utils/app_constants.dart';
 import '../common/utils/utility.dart';
+import '../routes/app_pages.dart';
 import 'base_controller.dart';
-
 
 class LoginController extends BaseController {
   String deviceType = "";
@@ -18,7 +17,17 @@ class LoginController extends BaseController {
 
   var formKey = GlobalKey<FormState>();
   var otpValue = "".obs;
+  final mobileController = TextEditingController();
+  final isPasswordVisible = false.obs;
+  final rememberMe = false.obs;
 
+  void togglePasswordVisibility() {
+    isPasswordVisible.value = !isPasswordVisible.value;
+  }
+
+  void toggleRememberMe() {
+    rememberMe.value = !rememberMe.value;
+  }
   @override
   Future<void> onInit() async {
     // NotificationHelper().requestStoragePermission();
@@ -28,12 +37,15 @@ class LoginController extends BaseController {
 
   validate(BuildContext context) async {
     Get.focusScope?.unfocus();
+    Get.toNamed(Routes.otpVerification);
+
     if (userNameController.text.isEmpty) {
       Utils.showToast(AppConstants.errorUsername);
     } else if (passwordController.text.isEmpty) {
       Utils.showToast(AppConstants.errorPassword);
     } else {
-      loginApiCall();
+
+    //  loginApiCall();
     }
   }
 

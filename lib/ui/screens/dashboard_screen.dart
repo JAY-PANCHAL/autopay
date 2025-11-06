@@ -1,300 +1,184 @@
-// import 'package:aasaan_flutter/common/utils/app_constants.dart';
-// import 'package:aasaan_flutter/common/utils/image_paths.dart';
-// import 'package:aasaan_flutter/common/utils/storage_service.dart';
-// import 'package:aasaan_flutter/controller/dashboard_controller.dart';
-// import 'package:aasaan_flutter/db/db_helper.dart';
-// import 'package:aasaan_flutter/network/model/token_model.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:get/get.dart';
-// import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-// import '../../common/notification_main.dart';
-// import '../../common/utils/color_constants.dart';
-// import '../../common/utils/utility.dart';
-// import '../../main.dart';
-// import '../../routes/app_pages.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 
-// class DashboardScreen extends StatefulWidget {
-//   const DashboardScreen({Key? key}) : super(key: key);
+// Assuming MainScreenController.dart is the same
+class MainScreenController extends GetxController {
+  var currentIndex = 2.obs;
 
-//   @override
-//   State<StatefulWidget> createState() => DashboardScreenState();
-// }
+  // This controller is managed by the PersistentTabView now, but we keep the logic minimal
+  void changeTabIndex(int index) {
+    currentIndex.value = index;
+  }
+}
 
-// class DashboardScreenState extends State<DashboardScreen> {
-//   final DashboardController dashboardController =
-//       Get.put((DashboardController()));
-//   bool obscureText = true;
-//   var istablet = Utils.checkTablet();
-//   @override
-//   void initState() {
-//     addData();
-//     super.initState();
-//   }
+// --- Placeholder Screen Widgets (Define your actual screens here) ---
+class DashboardScreen extends StatelessWidget {
+  const DashboardScreen({super.key});
 
-//   addData() async {
-//     dashboardController.locationMasterApiCall(context);
-//     await DBHelper().database; // Initialize database
+  @override
+  Widget build(BuildContext context) {
+    return const Center(child: Text("Dashboard Content - State Preserved"));
+  }
+}
 
+class MapScreen extends StatelessWidget {
+  const MapScreen({super.key});
 
-//     dashboardController.list.value = [
-//       FileModel(
-//         name: "Milk Collection",
-//         path: AppIcons.milkCollection,
-//         onPressed: () {
-//           Get.toNamed(Routes.milkCollection);
-//         },
-//       ),
-//       FileModel(
-//         name: "Local Sales Entry",
-//         path: AppIcons.localSalesEntry,
-//         onPressed: () {
-//           Get.toNamed(Routes.localSalesEntry);
-//         },
-//       ),
-//       FileModel(
-//         name: "Dispatch Sales Entry",
-//         path: AppIcons.dispatchSlipEntry,
-//         onPressed: () {
-//           Get.toNamed(Routes.dispatchSalesEntry);
-//         },
-//       ),
-//       FileModel(
-//         name: "Union Truck Slip Confirmation Entry",
-//         path: AppIcons.confirmationEntry,
-//         onPressed: () {
-//           Get.toNamed(Routes.truckSlipConfirmation);
-//         },
-//       ),
-//       FileModel(
-//         name: "Deduction Entry",
-//         path: AppIcons.deductionEntry,
-//         onPressed: () {
-//         // Utils.showToast("Under Development");
-//            Get.toNamed(Routes.deductionEntry);
-//         },
-//       ),
-//       FileModel(
-//         name: "Collection Summary",
-//         path: AppIcons.todaysSummary,
-//         onPressed: () {
-//           Get.toNamed(Routes.collectionSummary);
-//         },
-//       ),
-//       FileModel(
-//         name: "Farmer Profile",
-//         path: AppIcons.farmerProfile,
-//         onPressed: () {
-//           Get.toNamed(Routes.farmerProfile);
-//         },
-//       ),
-//       FileModel(
-//         name: "Report Statement",
-//         path: AppIcons.reportStatement,
-//         onPressed: () {
-//           Get.toNamed(Routes.reportStatement);
-//         },
-//       ),
-//       FileModel(
-//         name: "Print Duplicate",
-//         path: AppIcons.printDuplicate,
-//         onPressed: () {
-//           Get.toNamed(Routes.printDuplicate);
-//         },
-//       ),
-//       FileModel(
-//         name: "Feedback",
-//         path: AppIcons.feedback,
-//         onPressed: () {
-//           Get.toNamed(Routes.feedback);
-//         },
-//       ),
-//       FileModel(
-//         name: "Rate Chart",
-//         path: AppIcons.rateMaster,
-//         onPressed: () {
-//           Get.toNamed(Routes.rateChart);
-//         },
-//       ),
-//       FileModel(
-//         name: "Import Rate Chart",
-//         path: AppIcons.feedback,
-//         onPressed: () {
-//           Get.toNamed(Routes.importRateChart);
-//         },
-//       ),
-//       FileModel(
-//         name: "Setting",
-//         path: AppIcons.setting,
-//         onPressed: () {
-//           Get.toNamed(Routes.setting);
-//         },
-//       ),
-//       FileModel(
-//         name: "Bulk Farmer Data Management",
-//         path: AppIcons.multipleMember,
-//         onPressed: () {
-//           Get.toNamed(Routes.bulkFarmerData);
-//         },
-//       ),
-//       FileModel(
-//         name: "Get Milk Collection Data From Server",
-//         path: AppIcons.deductionEntry,
-//         onPressed: () {
-//           Get.toNamed(Routes.syncMilkCollection);
-//         },
-//       ),
-//       FileModel(
-//         name: "Sync Milk Collection to Server",
-//         path: AppIcons.deductionEntry,
-//         onPressed: () async {
-//           dashboardController.isLoading.value=true;
-//           await commonController.callPostMilkCollection(true);
-//           dashboardController.isLoading.value=false;
-//         },
-//       ),
-//       FileModel(
-//         name: "Get Farmer Data from Server",
-//         path: AppIcons.deductionEntry,
-//         onPressed: () async {
-//           dashboardController.isLoading.value=true;
-//           await commonController.getMemberCountApiCall(context);
-//           dashboardController.isLoading.value=false;
-//         },
-//       ),
-//     ];
-//   }
+  @override
+  Widget build(BuildContext context) {
+    return const Center(child: Text("Map Content - State Preserved"));
+  }
+}
 
-//   @override
-//   Widget build(BuildContext context) {
-//     var width = Utils.getScreenWidth(context);
-//     var height = Utils.getScreenHeight(context);
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
-//     return Obx(() {
-//       return ModalProgressHUD(
-//           color: Colors.black.withOpacity(0.6),
-//           dismissible: false,
-//           blur: 5,
-//           progressIndicator: Utils.loader(context),
-//           inAsyncCall: dashboardController.isLoading.value,
-//           child: Scaffold(
-//             resizeToAvoidBottomInset: true,
-//             appBar: AppBar(
-//               title: Utils.normalText("Dashboard",
-//                   size: istablet ? 4.sp : 15.sp, color: Colors.white),
-//               centerTitle: true,
-//               backgroundColor: AppColors.appColor,
+  @override
+  Widget build(BuildContext context) {
+    return const Center(child: Text("Home Content (Speedometer goes here)"));
+  }
+}
 
-//               actions: [
-//                /* GestureDetector(
-//                     onTap: (){
-//                         Get.toNamed(Routes.bluetoothScreen);
-//                     },
-//                     child: Icon(Icons.bluetooth)),
-//                 Utils.addHGap(20),*/
-//                 GestureDetector(
-//                     onTap: (){
-//                       DBHelper().showLogoutConfirmation(context);
-//                     },
-//                     child: Icon(Icons.logout)),
-//                 Utils.addHGap(20)
-//               ],
-//             ),
-//             body: Padding(
-//               padding: EdgeInsets.all(10.w),
-//               child: dashboardController.isGridView.value
-//                   ? buildGridView()
-//                   : buildListView(),
-//             ),
-//             floatingActionButton: Container(
-//               height: istablet ? 50.h : 50.h,
-//               width: istablet ? 50.w : 50.w,
-//               child: FloatingActionButton(
-//                 backgroundColor: AppColors.appColor,
-//                 onPressed: () {
-//                   setState(() {
-//                     dashboardController.isGridView.value =
-//                         !dashboardController.isGridView.value;
-//                   });
-//                 },
-//                 child: Icon(
-//                   dashboardController.isGridView.value
-//                       ? Icons.list
-//                       : Icons.grid_view,
-//                   size: istablet ? 16.sp : 18.sp,
-//                 ),
-//               ),
-//             ),
-//           ));
-//     });
-//   }
+class ReportsScreen extends StatelessWidget {
+  const ReportsScreen({super.key});
 
-//   // ListView with rounded images and text
-//   Widget buildListView() {
-//     return ListView.builder(
-//       itemCount: dashboardController.list.value.length,
-//       itemBuilder: (context, index) {
-//         final file = dashboardController.list.value[index];
-//         return InkWell(
-//           onTap: file.onPressed,
-//           child: Card(
-//               shape: RoundedRectangleBorder(
-//                   borderRadius: BorderRadius.circular(12.r)),
-//               margin: EdgeInsets.symmetric(vertical: 8.h, horizontal: 5.w),
-//               elevation: 3,
-//               child: ListTile(
-//                   contentPadding: EdgeInsets.all(10.w),
-//                   leading: ClipRRect(
-//                     borderRadius: BorderRadius.circular(10.r),
-//                     child: Image.asset(file.path,
-//                         width: istablet ? 30.w : 50.w,
-//                         height: istablet ? 60.h : 50.h,
-//                         fit: BoxFit.cover),
-//                   ),
-//                   title: Text(file.name,
-//                       style: TextStyle(
-//                           fontSize: 16.sp, fontWeight: FontWeight.w500)))),
-//         );
-//       },
-//     );
-//   }
+  @override
+  Widget build(BuildContext context) {
+    return const Center(child: Text("Reports Content - State Preserved"));
+  }
+}
 
-//   // GridView with images and text
-//   Widget buildGridView() {
-//     return GridView.builder(
-//       itemCount: dashboardController.list.value.length,
-//       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-//         crossAxisCount: 2,
-//         crossAxisSpacing: 10.w,
-//         mainAxisSpacing: 10.h,
-//         childAspectRatio: istablet ? 1.4 : 1.0,
-//       ),
-//       itemBuilder: (context, index) {
-//         final file = dashboardController.list.value[index];
-//         return InkWell(
-//           onTap: file.onPressed,
-//           child: Card(
-//             shape: RoundedRectangleBorder(
-//                 borderRadius: BorderRadius.circular(12.r)),
-//             elevation: 3,
-//             child: Column(
-//               mainAxisAlignment: MainAxisAlignment.center,
-//               children: [
-//                 ClipRRect(
-//                   borderRadius: BorderRadius.circular(10.r),
-//                   child: Image.asset(file.path,
-//                       width: 80.w, height: 80.h, fit: BoxFit.cover),
-//                 ),
-//                 SizedBox(height: 8.h),
-//                 Text(file.name,
-//                     textAlign: TextAlign.center,
-//                     style: TextStyle(
-//                         fontSize: 14.sp, fontWeight: FontWeight.w500)),
-//               ],
-//             ),
-//           ),
-//         );
-//       },
-//     );
-//   }
-// }
+class SettingScreen extends StatelessWidget {
+  const SettingScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(child: Text("Setting Content - State Preserved"));
+  }
+}
+// ------------------------------------------------------------------
+
+// Utility constants (AppColors and Styles)
+const AppColors = Color(0xFF4C87B5);
+
+class Styles {
+  static TextStyle textFontRegular({
+    double size = 14,
+    FontWeight weight = FontWeight.normal,
+    Color color = Colors.black,
+  }) {
+    return TextStyle(fontSize: size, fontWeight: weight, color: color);
+  }
+}
+
+class MainScreen extends StatelessWidget {
+  MainScreen({super.key});
+
+  final MainScreenController controller = Get.put(MainScreenController());
+
+  // Define the list of screen widgets for the PersistentTabView
+  final List<Widget> screens = const [
+    DashboardScreen(),
+    MapScreen(),
+    HomeScreen(),
+    ReportsScreen(),
+    SettingScreen(),
+  ];
+
+  // --- Build the Custom Items ---
+  List<PersistentTabConfig> get _tabs => [
+    _buildTabItem(Icons.grid_view_outlined, "Dashboard", 0),
+    _buildTabItem(Icons.location_on, "Map", 1),
+    _buildTabItem(Icons.home, "Home", 2),
+    _buildTabItem(Icons.bar_chart, "Reports", 3),
+    _buildTabItem(Icons.settings, "Setting", 4),
+  ];
+
+  // Helper to build a single PersistentTabConfig
+  PersistentTabConfig _buildTabItem(IconData icon, String label, int index) {
+    return PersistentTabConfig(
+      screen: screens[index], // Assign the correct screen
+      item: ItemConfig(
+        title: label,
+        icon: Obx(
+          () => Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(icon, size: 24.sp),
+              // Custom Blue Indicator Line
+              Container(
+                margin: EdgeInsets.only(top: 2.sp),
+                height: 3.sp,
+                width: 30.sp,
+                color: controller.currentIndex.value == index
+                    ? AppColors
+                    : Colors.transparent,
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 2.sp),
+                child: Text(
+                  label,
+                  style: Styles.textFontRegular(
+                    size: 12.sp,
+                    weight: FontWeight.w500,
+                    // Color handling is done here for the custom look
+                    color: controller.currentIndex.value == index
+                        ? AppColors
+                        : Colors.black,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        // Item configuration for when the item is active/inactive
+        activeForegroundColor: AppColors, // Main color for the tab bar
+        inactiveForegroundColor: Colors.black,
+      ),
+      // Set initial state
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // We use the PersistentTabController to manage the index
+    final PersistentTabController tabController = PersistentTabController(
+      initialIndex: controller.currentIndex.value, // Start at Home (2)
+    );
+
+    // Listen to changes in the package's controller and update the GetX controller
+    tabController.addListener(() {
+      controller.changeTabIndex(tabController.index);
+    });
+
+    return PersistentTabView(
+      controller: tabController,
+      tabs: _tabs,
+
+      // --- Configuration to match the screenshot look and feel ---
+      navBarBuilder: (navBarConfig) => Style15BottomNavBar(
+        navBarConfig: navBarConfig,
+        navBarDecoration: NavBarDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(16),
+            topRight: Radius.circular(16),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 10,
+              offset: const Offset(0, -5),
+            ),
+          ],
+        ),
+      ),
+
+      // Required settings for persistence
+      stateManagement: true,
+      hideNavigationBar: false,
+    );
+  }
+}

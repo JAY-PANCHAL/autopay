@@ -2,17 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
 import '../../../common/utils/Styles.dart';
 import '../../../common/utils/color_constants.dart';
 import '../../../common/utils/image_paths.dart';
 import '../../../common/utils/utility.dart';
-import '../../../controller/signup_dealer_controller.dart';
-import '../../../controller/signup_distributor_controller.dart';
 import '../../../controller/singup_vendor_controller.dart';
 
 class SignupVendorScreen extends StatefulWidget {
-
   SignupVendorScreen({super.key});
 
   @override

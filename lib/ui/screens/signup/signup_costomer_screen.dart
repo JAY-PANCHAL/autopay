@@ -2,18 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
 import '../../../common/utils/Styles.dart';
 import '../../../common/utils/color_constants.dart';
 import '../../../common/utils/image_paths.dart';
 import '../../../common/utils/utility.dart';
 import '../../../controller/signup_customer_controller.dart';
-import '../../../controller/signup_dealer_controller.dart';
-import '../../../controller/signup_distributor_controller.dart';
-import '../../../controller/singup_vendor_controller.dart';
 
 class SignupCustomerScreen extends StatefulWidget {
-
   SignupCustomerScreen({super.key});
 
   @override
@@ -37,7 +32,7 @@ class _SignupCustomerScreenState extends State<SignupCustomerScreen> {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(AppIcons.common_bg),
-
+            fit: BoxFit.cover,
           ),
         ),
         child: SingleChildScrollView(
@@ -118,7 +113,7 @@ class _SignupCustomerScreenState extends State<SignupCustomerScreen> {
                       SizedBox(height: 15.sp),
 
                       // Upload photo
-/*
+                      /*
                       Column(
                         children: [
                           CircleAvatar(
@@ -142,7 +137,6 @@ class _SignupCustomerScreenState extends State<SignupCustomerScreen> {
                         ],
                       ),
 */
-
                       SizedBox(height: 25.sp),
 
                       // Name fields
@@ -176,7 +170,7 @@ class _SignupCustomerScreenState extends State<SignupCustomerScreen> {
 
                       // Password
                       Obx(
-                            () => TextFormField(
+                        () => TextFormField(
                           controller: controller.passwordController,
                           obscureText: !controller.isPasswordVisible.value,
                           decoration: InputDecoration(
@@ -197,7 +191,7 @@ class _SignupCustomerScreenState extends State<SignupCustomerScreen> {
                             ),
                           ),
                           validator: (value) =>
-                          value!.isEmpty ? "Password required" : null,
+                              value!.isEmpty ? "Password required" : null,
                         ),
                       ),
                       SizedBox(height: 12.sp),
@@ -207,13 +201,15 @@ class _SignupCustomerScreenState extends State<SignupCustomerScreen> {
                         controller.mobileController,
                         "Mobile Number",
                         hint: "Enter Your Mobile Number",
-                      ),                      SizedBox(height: 12.sp),
+                      ),
+                      SizedBox(height: 12.sp),
 
                       _buildTextField(
                         controller.otpController,
                         "OTP",
                         hint: "Enter Your OTP",
-                      ),                      SizedBox(height: 12.sp),
+                      ),
+                      SizedBox(height: 12.sp),
 
                       // City / PO
                       Row(
@@ -309,7 +305,7 @@ class _SignupCustomerScreenState extends State<SignupCustomerScreen> {
 
                       // Terms Checkbox
                       Obx(
-                            () => Row(
+                        () => Row(
                           children: [
                             Checkbox(
                               value: controller.isTermsAccepted.value,
@@ -373,10 +369,10 @@ class _SignupCustomerScreenState extends State<SignupCustomerScreen> {
   }
 
   Widget _buildTextField(
-      TextEditingController controller,
-      String label, {
-        String? hint,
-      }) {
+    TextEditingController controller,
+    String label, {
+    String? hint,
+  }) {
     return TextFormField(
       controller: controller,
       decoration: InputDecoration(

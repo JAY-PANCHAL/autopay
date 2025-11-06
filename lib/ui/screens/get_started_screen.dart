@@ -211,6 +211,7 @@ class GetStartedScreenState extends State<GetStartedScreen> {
                           ),
                           onPressed: () {
                             // TODO: navigate to login
+                            Get.toNamed(Routes.login);
                           },
                           child: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,

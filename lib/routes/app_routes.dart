@@ -13,6 +13,7 @@ abstract class Routes {
 
   static const login = '/login';
   static const homeScreen = '/homeScreen';
+  static const otpVerification = '/otpVerification';
 
 
 }
