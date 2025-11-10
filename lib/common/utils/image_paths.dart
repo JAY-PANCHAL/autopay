@@ -9,4 +9,14 @@ class AppIcons {
   static const String vendor = 'assets/images/vendor.png';
 
 
+
+  static const String geofences = 'assets/images/geofences.png';
+  static const String expense = 'assets/images/expense.png';
+  static const String licenses = 'assets/images/licences.png';
+  static const String dealers = 'assets/images/dealers.png';
+  static const String customers = "assets/images/customers.png";
+  static const String configAlert = 'assets/images/configalert.png';
+  static const String changePassword = 'assets/images/chngpwd.png';
+  static const String generalSetting = 'assets/images/gensetting.png';
+
 }

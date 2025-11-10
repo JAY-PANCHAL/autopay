@@ -132,4 +132,25 @@ class Styles {
       fontSize: value,
       fontFamily: "Inter",
       fontWeight: FontWeight.w400);
+
+
+  static TextStyle headlineTextStyle({double? size, FontWeight? weight, Color? color}) {
+    return TextStyle(
+      fontSize: size ?? 22.sp,
+      fontFamily: "Inter",
+
+      fontWeight: weight ?? FontWeight.bold,
+      color: color ?? AppColors.black,
+    );
+  }
+
+  static TextStyle subtitleTextStyle({double? size, FontWeight? weight, Color? color}) {
+    return TextStyle(
+      fontSize: size ?? 16.sp,
+      fontFamily: "Inter",
+      fontWeight: weight ?? FontWeight.normal,
+      color: color ?? AppColors.black,
+    );
+  }
+
 }

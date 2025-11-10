@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import '../../common/utils/Styles.dart';
-import '../../common/utils/color_constants.dart';
-import '../../common/utils/image_paths.dart';
-import '../../common/utils/utility.dart';
+import '../../../common/utils/Styles.dart';
+import '../../../common/utils/color_constants.dart';
+import '../../../common/utils/image_paths.dart';
+import '../../../common/utils/utility.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../routes/app_pages.dart';
+import '../../../routes/app_pages.dart';
 
 class GetStartedScreen extends StatefulWidget {
   const GetStartedScreen({Key? key}) : super(key: key);

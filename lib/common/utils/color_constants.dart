@@ -74,6 +74,16 @@ class AppColors {
   static const Color lightGreen = Color.fromARGB(255, 244, 255, 230);
   static const Color lightOrange = Color.fromARGB(255, 255, 237, 230);
   static const Color lightBlue = Color.fromARGB(255, 230, 247, 255);
+
+  static const Color primaryBlue = Color(0xFF1E88E5); // A darker blue for icons/text
+
+
+  static const Color lightBlue1 = Color(0xFFE0F2F7); // Lighter blue for gradient start
+  static const Color lightBlue2 = Color(0xFFBBDEFB); // Middle blue for gradient
+
+  static const Color greyText = Color(0xFF616161);
+
+
   static const MaterialColor appColor = MaterialColor(
     0xFF0CA7D2,
     <int, Color>{
