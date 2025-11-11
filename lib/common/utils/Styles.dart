@@ -9,7 +9,7 @@ class Styles {
           fontFamily: "Inter",
           color: color,
           fontStyle: FontStyle.normal,
-          fontSize: size,
+          fontSize: size.sp,
           fontWeight: fontWeight);
 
   static TextStyle textFontRegular(
@@ -29,26 +29,26 @@ class Styles {
       fontFamily: "Inter",
       color: Colors.black,
       fontStyle: FontStyle.normal,
-      fontSize: size,
+      fontSize: size.sp,
       fontWeight: FontWeight.w800);
 
   static TextBoxLableStyle(size) => TextStyle(
       fontFamily: "Inter",
       color: AppColors.appColor,
       fontStyle: FontStyle.normal,
-      fontSize: size,
+      fontSize: size.sp,
       fontWeight: FontWeight.w400);
 
   static TextBoxLableStyleWhite(size) => TextStyle(
       fontFamily: "Inter",
       color: Colors.white,
       fontStyle: FontStyle.normal,
-      fontSize: size,
+      fontSize: size.sp,
       fontWeight: FontWeight.w400);
 
   static gridText(size) => TextStyle(
       color: Colors.white,
-      fontSize: size,
+      fontSize: size.sp,
       fontFamily: "Inter",
       fontWeight: FontWeight.w400);
 
@@ -56,35 +56,35 @@ class Styles {
       fontFamily: "Inter",
       color: Colors.grey,
       fontStyle: FontStyle.normal,
-      fontSize: size,
+      fontSize: size.sp,
       fontWeight: FontWeight.w400);
 
   static ButtonTextStyle(size) => TextStyle(
       fontFamily: "Inter",
       color: Colors.white,
       fontStyle: FontStyle.normal,
-      fontSize: size,
+      fontSize: size.sp,
       fontWeight: FontWeight.w400);
 
   static ButtonLoadingTextStyle(size) => TextStyle(
       fontFamily: "Inter",
       color: Colors.white,
       fontStyle: FontStyle.normal,
-      fontSize: size,
+      fontSize: size.sp,
       fontWeight: FontWeight.w400);
 
   static SignUpBottomButtonText(size) => TextStyle(
       fontFamily: "Inter",
       color: Colors.white,
       fontStyle: FontStyle.normal,
-      fontSize: size,
+      fontSize: size.sp,
       fontWeight: FontWeight.w600);
 
   static SignUpBottomButtonBoldText(size) => TextStyle(
       fontFamily: "Inter",
       color: Colors.white,
       fontStyle: FontStyle.normal,
-      fontSize: size,
+      fontSize: size.sp,
       fontWeight: FontWeight.w800);
 
   static TextStyle textFontBold(
@@ -146,7 +146,7 @@ class Styles {
 
   static TextStyle subtitleTextStyle({double? size, FontWeight? weight, Color? color}) {
     return TextStyle(
-      fontSize: size ?? 16.sp,
+      fontSize: size ?? 14.sp,
       fontFamily: "Inter",
       fontWeight: weight ?? FontWeight.normal,
       color: color ?? AppColors.black,

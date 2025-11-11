@@ -19,4 +19,18 @@ class AppIcons {
   static const String changePassword = 'assets/images/chngpwd.png';
   static const String generalSetting = 'assets/images/gensetting.png';
 
+
+    static const String car = 'assets/images/car.png';
+
+
+
+  static const String more = 'assets/images/more.png';
+  static const String calendar = 'assets/images/calendar.png';
+  static const String setellite = 'assets/images/setellite.png';
+  static const String power = 'assets/images/power.png';
+  static const String key = 'assets/images/key.png';
+  static const String freeze = 'assets/images/freeze.png';
+
+
+
 }

@@ -1,3 +1,4 @@
+import 'package:autopay/ui/screens/dashboard/map_screen.dart';
 import 'package:autopay/ui/screens/dashboard/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,6 +7,7 @@ import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 
 import '../../../common/utils/Styles.dart';
 import '../../../common/utils/color_constants.dart';
+import 'home_screen.dart';
 
 // Assuming MainScreenController.dart
 class MainScreenController extends GetxController {
@@ -27,23 +29,6 @@ class DashboardScreen extends StatelessWidget {
   }
 }
 
-class MapScreen extends StatelessWidget {
-  const MapScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(child: Text("Map Content - State Preserved"));
-  }
-}
-
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(child: Text("Home Content (Speedometer goes here)"));
-  }
-}
 
 class ReportsScreen extends StatelessWidget {
   const ReportsScreen({super.key});
@@ -53,8 +38,6 @@ class ReportsScreen extends StatelessWidget {
     return const Center(child: Text("Reports Content - State Preserved"));
   }
 }
-
-
 
 // --- MainScreen Widget ---
 class MainScreen extends StatelessWidget {

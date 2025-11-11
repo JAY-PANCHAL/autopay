@@ -67,23 +67,20 @@ dev_dependencies:
   pinput: ^5.0.2
   flutter_form_builder: ^10.1.0
   form_builder_validators: ^11.1.1
-  sqflite: ^2.4.1
   path_provider: ^2.1.5
   firebase_core: ^4.2.0
   firebase_messaging: ^16.0.3
   # flutter_local_notifications: ^18.0.1
-  excel: ^4.0.6
   dropdown_search: ^6.0.2
   form_builder_extra_fields: ^12.1.0
   connectivity_plus: ^7.0.0
   image: ^4.3.0
   share_plus: ^12.0.1
-  animate_do: ^4.2.0
-  double_tap_to_exit: ^1.0.2
-  photo_view: ^0.15.0
   font_awesome_flutter: ^10.7.0
   syncfusion_flutter_gauges: ^31.2.5
   persistent_bottom_nav_bar_v2: ^6.2.0
+  google_maps_flutter: ^2.14.0
+  timelines_plus: ^1.0.8
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

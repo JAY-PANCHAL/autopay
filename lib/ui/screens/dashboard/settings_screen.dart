@@ -1,9 +1,12 @@
 import 'package:autopay/common/utils/image_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import '../../../common/utils/Styles.dart';
-import '../../../common/utils/color_constants.dart'; // For responsive sizing
+import '../../../common/utils/color_constants.dart';
+import '../../../routes/app_pages.dart';
+import '../settings/change_password.dart'; // For responsive sizing
 
 class AppSettingScreen extends StatelessWidget {
   const AppSettingScreen({super.key});
@@ -50,6 +53,7 @@ class AppSettingScreen extends StatelessWidget {
                     // Using lock icon for change password
                     title: "Change Password",
                     onTap: () {
+                      showChangePasswordDialog(context); // Call the method here
                       // Handle tap
                     },
                   ),
@@ -65,6 +69,7 @@ class AppSettingScreen extends StatelessWidget {
                     title: "Customers",
                     onTap: () {
                       // Handle tap
+                      Get.toNamed(Routes.customerListScreen);
                     },
                   ),
                   _SettingsTile(
@@ -111,7 +116,7 @@ class AppSettingScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
         child: Row(
           children: [
-           /* GestureDetector(
+            /* GestureDetector(
               onTap: () {
            //     Navigator.of(context).pop(); // Go back
               },
@@ -185,7 +190,7 @@ class _SettingsTile extends StatelessWidget {
           ),
           child: Row(
             children: [
-           Image.asset(icon,height: 28.sp,width: 28.sp),
+              Image.asset(icon, height: 28.sp, width: 28.sp),
 
               //   Icon(icon, color: AppColors.primaryBlue, size: 28.sp),
               SizedBox(width: 15.w),
@@ -207,31 +212,6 @@ class _SettingsTile extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-// You would typically run this in your main.dart file
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    // Initialize ScreenUtil once at the root of your app
-    return ScreenUtilInit(
-      designSize: const Size(375, 812), // Standard phone design size
-      builder: (context, child) => MaterialApp(
-        title: 'App Settings Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-        home: const AppSettingScreen(),
       ),
     );
   }

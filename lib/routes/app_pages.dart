@@ -1,3 +1,4 @@
+import 'package:autopay/ui/screens/settings/customer_list_screen.dart';
 import 'package:autopay/ui/screens/signup/otp_verify_screen.dart';
 import 'package:autopay/ui/screens/signup/signup_dealer_screen.dart';
 import 'package:autopay/ui/screens/signup/signup_vendor_screen.dart';
@@ -33,32 +34,38 @@ class AppPages {
     GetPage(
       name: Routes.getstarted,
       page: () => GetStartedScreen(),
-      transition: Transition.downToUp,
+      transition: Transition.rightToLeft,
     ),
     GetPage(
       name: Routes.signupDistributorScreen,
       page: () => SignupDistributorScreen(),
-      transition: Transition.downToUp,
+      transition: Transition.rightToLeft,
     ),
     GetPage(
       name: Routes.signupDealerScreen,
       page: () => SignupDealerScreen(),
-      transition: Transition.downToUp,
+      transition: Transition.rightToLeft,
     ),
     GetPage(
       name: Routes.signupVendorScreen,
       page: () => SignupVendorScreen(),
-      transition: Transition.downToUp,
+      transition: Transition.rightToLeft,
     ),
     GetPage(
       name: Routes.signupCustomerScreen,
       page: () => SignupCustomerScreen(),
-      transition: Transition.downToUp,
+      transition: Transition.rightToLeft,
     ),
     GetPage(
       name: Routes.homeScreen,
       page: () => MainScreen(),
-      transition: Transition.downToUp,
+      transition: Transition.rightToLeft,
+    ),
+
+    GetPage(
+      name: Routes.customerListScreen,
+      page: () => CustomersListScreen(),
+      transition: Transition.rightToLeft,
     ),
   ];
 }
