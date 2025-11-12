@@ -185,6 +185,7 @@ class CustomersListScreen extends StatelessWidget {
                 children: [
                   // Top Row → Name + Add Device button aligned at end
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Expanded(
                         child: Text(
@@ -206,12 +207,14 @@ class CustomersListScreen extends StatelessWidget {
                   SizedBox(height: 12.h),
                   // Bottom Row → User ID + Action icons at end
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
                         child: Text(
                           "User Id : ${customer.userId}",
                           style: Styles.subtitleTextStyle(size: 12.sp),
                           overflow: TextOverflow.ellipsis,
+
                         ),
                       ),
                       Row(
@@ -252,7 +255,7 @@ class CustomersListScreen extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: EdgeInsets.symmetric(
-          horizontal: isPrimary ? 20.w : 10.w,
+          horizontal: isPrimary ? 25.w : 10.w,
           vertical: 6.h,
         ),
         decoration: BoxDecoration(
