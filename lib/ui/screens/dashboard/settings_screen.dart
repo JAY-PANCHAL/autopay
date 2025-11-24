@@ -90,13 +90,16 @@ class AppSettingScreen extends StatelessWidget {
                     icon: AppIcons.expense,
                     title: "Expense",
                     onTap: () {
-                      // Handle tap
+                      Get.toNamed(Routes.expenseScreen);
                     },
                   ),
                   _SettingsTile(
                     icon: AppIcons.geofences,
                     title: "Geofences",
                     onTap: () {
+
+                      Get.toNamed(Routes.geofenceHomeScreen);
+
                       // Handle tap
                     },
                   ),

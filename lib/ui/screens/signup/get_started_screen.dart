@@ -9,7 +9,6 @@ import '../../../common/utils/image_paths.dart';
 import '../../../common/utils/utility.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import '../../../routes/app_pages.dart';
 
 class GetStartedScreen extends StatefulWidget {

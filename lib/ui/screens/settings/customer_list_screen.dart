@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../common/utils/Styles.dart';
 import '../../../common/utils/color_constants.dart';
 import '../../../common/utils/utility.dart';
+import 'package:get/get.dart';
+
+import '../../../routes/app_pages.dart';
 
 class Customer {
   final String name;
@@ -310,7 +312,7 @@ class CustomersListScreen extends StatelessWidget {
         height: 40.h,
         child: ElevatedButton(
           onPressed: () {
-            // Action to add new customer
+            Get.toNamed(Routes.addNewCustomerScreen);
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.appblue,

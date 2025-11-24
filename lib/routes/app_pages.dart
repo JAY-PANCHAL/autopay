@@ -4,6 +4,10 @@ import 'package:autopay/ui/screens/signup/signup_dealer_screen.dart';
 import 'package:autopay/ui/screens/signup/signup_vendor_screen.dart';
 import 'package:get/get.dart';
 import '../ui/screens/dashboard/dashboard_screen.dart';
+import '../ui/screens/settings/add_customers_screen.dart';
+import '../ui/screens/settings/add_expense_screen.dart';
+import '../ui/screens/settings/expense_screen.dart';
+import '../ui/screens/settings/geofence_screen.dart';
 import '../ui/screens/signup/get_started_screen.dart';
 import '../ui/screens/signup/login_screen.dart';
 import '../ui/screens/signup/signup_costomer_screen.dart';
@@ -67,5 +71,26 @@ class AppPages {
       page: () => CustomersListScreen(),
       transition: Transition.rightToLeft,
     ),
+    GetPage(
+      name: Routes.addNewCustomerScreen,
+      page: () => AddNewCustomerScreen(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: Routes.expenseScreen,
+      page: () => ExpenseScreen(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: Routes.addExpenseScreen,
+      page: () => AddExpenseScreen(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: Routes.geofenceHomeScreen,
+      page: () => GeofenceHomeScreen(),
+      transition: Transition.rightToLeft,
+    ),
+
   ];
 }

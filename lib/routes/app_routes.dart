@@ -15,6 +15,12 @@ abstract class Routes {
   static const homeScreen = '/homeScreen';
   static const otpVerification = '/otpVerification';
   static const customerListScreen = '/customerListScreen';
+  static const addNewCustomerScreen = '/addNewCustomerScreen';
+  static const expenseScreen = '/expenseScreen';
+  static const addExpenseScreen = '/addExpenseScreen';
+  static const geofenceHomeScreen = '/geofenceHomeScreen';
+
+
 
 
 }

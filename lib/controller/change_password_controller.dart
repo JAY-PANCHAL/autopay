@@ -5,7 +5,6 @@ import 'base_controller.dart';
 import 'package:get/get.dart';
 
 class ChangePasswordController extends BaseController {
-  // Observables for managing password visibility for each field
   var oldPasswordVisible = false.obs;
   var newPasswordVisible = false.obs;
   var confirmPasswordVisible = false.obs;
