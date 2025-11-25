@@ -1,4 +1,6 @@
 import 'package:autopay/ui/screens/settings/customer_list_screen.dart';
+import 'package:autopay/ui/screens/settings/geofence_form_screen.dart';
+import 'package:autopay/ui/screens/settings/geofence_map_screen.dart';
 import 'package:autopay/ui/screens/signup/otp_verify_screen.dart';
 import 'package:autopay/ui/screens/signup/signup_dealer_screen.dart';
 import 'package:autopay/ui/screens/signup/signup_vendor_screen.dart';
@@ -7,6 +9,7 @@ import '../ui/screens/dashboard/dashboard_screen.dart';
 import '../ui/screens/settings/add_customers_screen.dart';
 import '../ui/screens/settings/add_expense_screen.dart';
 import '../ui/screens/settings/expense_screen.dart';
+import '../ui/screens/settings/general_settings.dart';
 import '../ui/screens/settings/geofence_screen.dart';
 import '../ui/screens/signup/get_started_screen.dart';
 import '../ui/screens/signup/login_screen.dart';
@@ -91,6 +94,22 @@ class AppPages {
       page: () => GeofenceHomeScreen(),
       transition: Transition.rightToLeft,
     ),
+    GetPage(
+      name: Routes.geofenceFormScreen,
+      page: () => GeofenceFormScreen(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: Routes.geofenceMapScreen,
+      page: () => GeofenceMapScreen(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: Routes.generalSettingsScreen,
+      page: () => GeneralSettingsScreen(),
+      transition: Transition.rightToLeft,
+    ),
+
 
   ];
 }

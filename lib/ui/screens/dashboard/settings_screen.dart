@@ -2,7 +2,6 @@ import 'package:autopay/common/utils/image_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
 import '../../../common/utils/Styles.dart';
 import '../../../common/utils/color_constants.dart';
 import '../../../routes/app_pages.dart';
@@ -13,9 +12,7 @@ class AppSettingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Initialize ScreenUtil in your main.dart or a parent widget if not already done
-    // For this example, we assume it's initialized.
-    // ScreenUtil.init(context, designSize: const Size(375, 812)); // Example values
+
 
     return Scaffold(
       body: Container(
@@ -35,7 +32,7 @@ class AppSettingScreen extends StatelessWidget {
         child: Column(
           children: [
             // Custom AppBar
-            _buildAppBar(context),
+              _buildAppBar(context),
             // Settings List
             Expanded(
               child: ListView(
@@ -45,12 +42,12 @@ class AppSettingScreen extends StatelessWidget {
                     icon: AppIcons.generalSetting,
                     title: "General Setting",
                     onTap: () {
+                      Get.toNamed(Routes.generalSettingsScreen);
                       // Handle tap
                     },
                   ),
                   _SettingsTile(
                     icon: AppIcons.changePassword,
-                    // Using lock icon for change password
                     title: "Change Password",
                     onTap: () {
                       showChangePasswordDialog(context); // Call the method here

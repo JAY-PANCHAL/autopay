@@ -19,6 +19,10 @@ abstract class Routes {
   static const expenseScreen = '/expenseScreen';
   static const addExpenseScreen = '/addExpenseScreen';
   static const geofenceHomeScreen = '/geofenceHomeScreen';
+  static const geofenceFormScreen = '/geofenceFormScreen';
+  static const geofenceMapScreen = '/geofenceMapScreen';
+
+  static const generalSettingsScreen = '/generalSettingsScreen';
 
 
 

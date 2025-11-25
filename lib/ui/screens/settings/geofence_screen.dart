@@ -1,207 +1,187 @@
 // Flutter geofence screens implementation
 
+import 'package:autopay/controller/base_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../common/utils/Styles.dart';
+import '../../../common/utils/color_constants.dart';
+import 'package:get/get.dart';
 
-
-
-class GeofenceHomeScreen extends StatelessWidget {
+class GeofenceHomeScreen extends StatefulWidget {
   const GeofenceHomeScreen({super.key});
 
   @override
+  State<GeofenceHomeScreen> createState() => _GeofenceHomeScreenState();
+}
+
+class _GeofenceHomeScreenState extends State<GeofenceHomeScreen> {
+  final FenceTypeController controller = Get.put(FenceTypeController());
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Icon(Icons.arrow_back),
-        title: const Text('Geofences'),
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const GeofenceFormScreen()));
-              },
-              icon: const Icon(Icons.add))
-        ],
-      ),
-      body: Column(
-        children: [
-          Container(
-            height: 260,
-            color: Colors.grey,
-            child: const Center(child: Text("MAP IMAGE PLACEHOLDER")),
-          ),
-          const SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(onPressed: () {}, child: const Text("Circular")),
-              const SizedBox(width: 12),
-              ElevatedButton(onPressed: () {}, child: const Text("Polygon")),
+      body: Container(
+        // Gradient Background
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              AppColors.lightBlue1, // Start color (lighter)
+              AppColors.lightBlue2, // Middle color
+              AppColors.white, // End color (can be adjusted for more blue)
             ],
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class GeofenceFormScreen extends StatefulWidget {
-  const GeofenceFormScreen({super.key});
-
-  @override
-  State<GeofenceFormScreen> createState() => _GeofenceFormScreenState();
-}
-
-class _GeofenceFormScreenState extends State<GeofenceFormScreen> {
-  String type = "circular";
-  final nameController = TextEditingController();
-  final locationController = TextEditingController();
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Create Geofence")),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            TextField(
-              controller: nameController,
-              decoration: const InputDecoration(labelText: "Fence Name"),
-            ),
-            const SizedBox(height: 16),
-            Row(
+            stops: [0.1, 0.5, 0.9], // Adjust stops for gradient distribution
+          ),
+        ),
+        child: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 20.h),
+            child: Column(
               children: [
-                Radio(
-                    value: "circular",
-                    groupValue: type,
-                    onChanged: (v) {
-                      setState(() => type = v!);
-                    }),
-                const Text("Circular"),
-                Radio(
-                    value: "polygon",
-                    groupValue: type,
-                    onChanged: (v) {
-                      setState(() => type = v!);
-                    }),
-                const Text("Polygon"),
+
+
+                Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () => Navigator.of(context).pop(),
+                      child: Container(
+                        padding: EdgeInsets.all(8.sp),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.05),
+                              blurRadius: 6,
+                              offset: const Offset(0, 3),
+                            ),
+                          ],
+                        ),
+                        child: Icon(Icons.arrow_back_ios_new, size: 18.sp),
+                      ),
+                    ),
+                    SizedBox(width: 16.w),
+                    Text(
+                      'GeoFences',
+                      style: TextStyle(
+                        fontSize: 22.sp,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+
+                SizedBox(height: 20.h),
+
+                Container(
+                  height: 260,
+                  color: Colors.grey,
+                  child: const Center(child: Text("MAP IMAGE PLACEHOLDER")),
+                ),
+                const SizedBox(height: 20),
+                fenceToggleSwitch()
+              /*  Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(onPressed: () {}, child: const Text("Circular")),
+                    const SizedBox(width: 12),
+                    ElevatedButton(onPressed: () {}, child: const Text("Polygon")),
+                  ],
+                ),*/
               ],
             ),
-            const SizedBox(height: 16),
-            TextField(
-              controller: locationController,
-              decoration: const InputDecoration(labelText: "Search Location"),
-              onSubmitted: (value) {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => GeofenceMapScreen(
-                          fenceType: type,
-                          searchQuery: value,
-                        )));
-              },
-            ),
-          ],
+          ),
         ),
       ),
     );
   }
-}
-
-class GeofenceMapScreen extends StatefulWidget {
-  final String fenceType;
-  final String searchQuery;
-  const GeofenceMapScreen(
-      {super.key, required this.fenceType, required this.searchQuery});
-
-  @override
-  State<GeofenceMapScreen> createState() => _GeofenceMapScreenState();
-}
-
-class _GeofenceMapScreenState extends State<GeofenceMapScreen> {
-  GoogleMapController? mapController;
-  LatLng? markerPos;
-  double radius = 200;
-  final List<LatLng> polygonPoints = [];
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Select Location")),
-      body: Stack(
-        children: [
-          GoogleMap(
-            initialCameraPosition:
-            const CameraPosition(target: LatLng(20.5937, 78.9629), zoom: 4),
-            onMapCreated: (c) => mapController = c,
-            onTap: (pos) {
-              setState(() {
-                if (widget.fenceType == "circular") {
-                  markerPos = pos;
-                } else {
-                  polygonPoints.add(pos);
-                }
-              });
-            },
-            markers: markerPos != null
-                ? {Marker(markerId: MarkerId("m1"), position: markerPos!)}
-                : {},
-            circles: widget.fenceType == "circular" && markerPos != null
-                ? {
-              Circle(
-                  circleId: const CircleId("c1"),
-                  center: markerPos!,
-                  radius: radius,
-                  fillColor: Colors.blue.withOpacity(0.3),
-                  strokeColor: Colors.blue,
-                  strokeWidth: 2)
-            }
-                : {},
-            polygons: widget.fenceType == "polygon"
-                ? {
-              Polygon(
-                  polygonId: const PolygonId("p1"),
-                  points: polygonPoints,
-                  fillColor: Colors.green.withOpacity(0.3),
-                  strokeColor: Colors.green,
-                  strokeWidth: 3)
-            }
-                : {},
-          ),
-          Positioned(
-            bottom: 20,
-            left: 0,
-            right: 0,
-            child: Column(
-              children: [
-                if (widget.fenceType == "circular") ...[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      IconButton(
-                          onPressed: () {
-                            setState(() => radius -= 50);
-                          },
-                          icon: const Icon(Icons.remove_circle)),
-                      Text("Radius: ${radius.toStringAsFixed(0)} m"),
-                      IconButton(
-                          onPressed: () {
-                            setState(() => radius += 50);
-                          },
-                          icon: const Icon(Icons.add_circle)),
-                    ],
-                  ),
-                ],
-                ElevatedButton(
-                    onPressed: () {}, child: const Text("Save Geofence"))
-              ],
+  Widget fenceToggleSwitch() {
+    return Obx(() {
+      return Container(
+        height: 45,
+        width: 260,
+        padding: const EdgeInsets.all(4),
+        decoration: BoxDecoration(
+          color: const Color(0xFFEFF7FB), // light gradient-like bg
+          borderRadius: BorderRadius.circular(30),
+        ),
+        child: Stack(
+          children: [
+            // Sliding Background
+            AnimatedAlign(
+              duration: const Duration(milliseconds: 250),
+              curve: Curves.easeInOut,
+              alignment: controller.isCircular.value
+                  ? Alignment.centerLeft
+                  : Alignment.centerRight,
+              child: Container(
+                width: 130,
+                decoration: BoxDecoration(
+                  color: const Color(0xFF2F89B3), // blue selected bg
+                  borderRadius: BorderRadius.circular(30),
+                ),
+              ),
             ),
-          )
-        ],
-      ),
-    );
+
+            // Buttons Layer
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: GestureDetector(
+                    onTap: controller.selectCircular,
+                    child: Center(
+                      child: Text(
+                        "Circular",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: controller.isCircular.value
+                              ? Colors.white
+                              : const Color(0xFF2F89B3),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: controller.selectPolygon,
+                    child: Center(
+                      child: Text(
+                        "Polygon",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: controller.isCircular.value
+                              ? const Color(0xFF2F89B3)
+                              : Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
+      );
+    });
   }
 }
+
+
+
+class FenceTypeController extends BaseController {
+  var isCircular = true.obs;
+
+  void selectCircular() => isCircular.value = true;
+  void selectPolygon() => isCircular.value = false;
+}
+
+
+
+
+
