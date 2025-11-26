@@ -23,6 +23,10 @@ abstract class Routes {
   static const geofenceMapScreen = '/geofenceMapScreen';
 
   static const generalSettingsScreen = '/generalSettingsScreen';
+  static const licensesScreen = '/licensesScreen';
+  static const configureAlertsScreen = '/configureAlertsScreen';
+  static const ignitionReportScreen = '/ignitionReportScreen';
+
 
 
 

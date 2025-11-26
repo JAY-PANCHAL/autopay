@@ -1,4 +1,5 @@
 import 'package:autopay/ui/screens/dashboard/map_screen.dart';
+import 'package:autopay/ui/screens/dashboard/reports_screen.dart';
 import 'package:autopay/ui/screens/dashboard/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -30,14 +31,7 @@ class DashboardScreen extends StatelessWidget {
 }
 
 
-class ReportsScreen extends StatelessWidget {
-  const ReportsScreen({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return const Center(child: Text("Reports Content - State Preserved"));
-  }
-}
 
 // --- MainScreen Widget ---
 class MainScreen extends StatelessWidget {

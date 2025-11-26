@@ -58,7 +58,9 @@ class AppSettingScreen extends StatelessWidget {
                     icon: AppIcons.configAlert,
                     title: "Configure Alerts",
                     onTap: () {
-                      // Handle tap
+
+                      Get.toNamed(Routes.configureAlertsScreen);
+
                     },
                   ),
                   _SettingsTile(
@@ -80,6 +82,9 @@ class AppSettingScreen extends StatelessWidget {
                     icon: AppIcons.licenses,
                     title: "Licenses",
                     onTap: () {
+                      Get.toNamed(Routes.licensesScreen);
+
+
                       // Handle tap
                     },
                   ),

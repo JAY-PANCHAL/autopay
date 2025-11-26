@@ -14,7 +14,6 @@ class LicensesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        // Gradient Background
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
@@ -27,117 +26,156 @@ class LicensesScreen extends StatelessWidget {
             stops: [0.1, 0.5, 0.9], // Adjust stops for gradient distribution
           ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildAppBar(context),
-
-            // ROW WITH DATE PICKERS
-            Row(
+        child: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 10.h),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // From Date
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "From Date",
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
+                Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: Container(
+                        padding: EdgeInsets.all(8.sp),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.05),
+                              blurRadius: 6,
+                              offset: const Offset(0, 3),
+                            ),
+                          ],
                         ),
+                        child: Icon(Icons.arrow_back_ios_new, size: 18.sp),
                       ),
-                      const SizedBox(height: 6),
-                      TextField(
-                        controller: controller.fromDateText,
-                        readOnly: true,
-                        onTap: () => controller.selectDate(context, true),
-                        decoration: InputDecoration(
-                          hintText: "Select Date",
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(width: 12),
-
-                // End Date
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "End Date",
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      const SizedBox(height: 6),
-                      TextField(
-                        controller: controller.endDateText,
-                        readOnly: true,
-                        onTap: () => controller.selectDate(context, false),
-                        decoration: InputDecoration(
-                          hintText: "Select Date",
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                const SizedBox(width: 12),
-
-                // Search Button
-                InkWell(
-                  onTap: controller.searchLicenses,
-                  child: Container(
-                    padding: const EdgeInsets.all(14),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF2C88B8),
-                      borderRadius: BorderRadius.circular(10),
                     ),
-                    child: const Icon(Icons.search, color: Colors.white),
+                    SizedBox(width: 16.w),
+                    Text(
+                      "Licenses",
+                      style: TextStyle(
+                        fontSize: 22.sp,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20.h),
+
+                // ROW WITH DATE PICKERS
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    // From Date
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "From Date",
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const SizedBox(height: 6),
+                          TextField(
+                            controller: controller.fromDateText,
+                            readOnly: true,
+                            onTap: () => controller.selectDate(context, true),
+                            decoration: InputDecoration(
+                              hintText: "Select Date",
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+
+                    // End Date
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "End Date",
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const SizedBox(height: 6),
+                          TextField(
+                            controller: controller.endDateText,
+                            readOnly: true,
+                            onTap: () => controller.selectDate(context, false),
+                            decoration: InputDecoration(
+                              hintText: "Select Date",
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    const SizedBox(width: 12),
+
+                    // Search Button
+                    Padding(
+                      padding: EdgeInsets.only(top:20.0.sp),
+                      child: InkWell(
+                        onTap: controller.searchLicenses,
+                        child: Container(
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: AppColors.appblue,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: const Icon(Icons.search, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+                const Spacer(),
+
+                // Add Licenses Button
+                Center(
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: controller.goToAddLicenses,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:AppColors.appblue,
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: const Text(
+                        "Add Licenses   +",
+                        style: TextStyle(fontSize: 17),
+                      ),
+                    ),
                   ),
                 ),
+
+                const SizedBox(height: 20),
               ],
             ),
-
-            const Spacer(),
-
-            // Add Licenses Button
-            Center(
-              child: SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: controller.goToAddLicenses,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF2C88B8),
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: const Text(
-                    "Add Licenses   +",
-                    style: TextStyle(fontSize: 17),
-                  ),
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 20),
-          ],
+          ),
         ),
       ),
     );

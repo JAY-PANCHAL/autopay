@@ -6,11 +6,14 @@ import 'package:autopay/ui/screens/signup/signup_dealer_screen.dart';
 import 'package:autopay/ui/screens/signup/signup_vendor_screen.dart';
 import 'package:get/get.dart';
 import '../ui/screens/dashboard/dashboard_screen.dart';
+import '../ui/screens/reports/ignition_report.dart';
 import '../ui/screens/settings/add_customers_screen.dart';
 import '../ui/screens/settings/add_expense_screen.dart';
+import '../ui/screens/settings/configure_alert_screen.dart';
 import '../ui/screens/settings/expense_screen.dart';
 import '../ui/screens/settings/general_settings.dart';
 import '../ui/screens/settings/geofence_screen.dart';
+import '../ui/screens/settings/licence_screen.dart';
 import '../ui/screens/signup/get_started_screen.dart';
 import '../ui/screens/signup/login_screen.dart';
 import '../ui/screens/signup/signup_costomer_screen.dart';
@@ -109,7 +112,21 @@ class AppPages {
       page: () => GeneralSettingsScreen(),
       transition: Transition.rightToLeft,
     ),
-
+    GetPage(
+      name: Routes.licensesScreen,
+      page: () => LicensesScreen(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: Routes.configureAlertsScreen,
+      page: () => ConfigureAlertsScreen(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: Routes.ignitionReportScreen,
+      page: () => IgnitionReportScreen(),
+      transition: Transition.rightToLeft,
+    ),
 
   ];
 }

@@ -80,6 +80,7 @@ class AppColors {
 
   static const Color lightBlue1 = Color(0xFFE6EDF0); // Lighter blue for gradient start
   static const Color lightBlue2 = Color(0xFFC2DDF7); // Middle blue for gradient
+  static const Color iconbg = Color(0xFFBD6602); // Lighter blue for gradient start
 
   static const Color greyText = Color(0xFF616161);
   static const Color borderGrey = Color(0xFFE0E0E0);
