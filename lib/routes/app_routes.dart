@@ -26,7 +26,14 @@ abstract class Routes {
   static const licensesScreen = '/licensesScreen';
   static const configureAlertsScreen = '/configureAlertsScreen';
   static const ignitionReportScreen = '/ignitionReportScreen';
+  static const acReportScreen = '/acReportScreen';
 
+  static const tripReportScreen = '/tripReportScreen';
+  static const stoppageReportScreen = '/stoppageReportScreen';
+  static const summaryReportScreen = '/summaryReportScreen';
+  static const dailyReportScreen = '/dailyReportScreen';
+  static const overSpeedReportScreen = '/overSpeedReportScreen';
+  static const geofenceReportScreen = '/geofenceReportScreen';
 
 
 

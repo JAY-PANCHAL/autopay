@@ -1,3 +1,9 @@
+import 'package:autopay/ui/screens/reports/daily_report_screen.dart';
+import 'package:autopay/ui/screens/reports/geo_fence_report_screen.dart';
+import 'package:autopay/ui/screens/reports/over_speed_report_screen.dart';
+import 'package:autopay/ui/screens/reports/stoppage_report.dart';
+import 'package:autopay/ui/screens/reports/summary_report_screen.dart';
+import 'package:autopay/ui/screens/reports/trip_report_screen.dart';
 import 'package:autopay/ui/screens/settings/customer_list_screen.dart';
 import 'package:autopay/ui/screens/settings/geofence_form_screen.dart';
 import 'package:autopay/ui/screens/settings/geofence_map_screen.dart';
@@ -6,6 +12,7 @@ import 'package:autopay/ui/screens/signup/signup_dealer_screen.dart';
 import 'package:autopay/ui/screens/signup/signup_vendor_screen.dart';
 import 'package:get/get.dart';
 import '../ui/screens/dashboard/dashboard_screen.dart';
+import '../ui/screens/reports/ac_report.dart';
 import '../ui/screens/reports/ignition_report.dart';
 import '../ui/screens/settings/add_customers_screen.dart';
 import '../ui/screens/settings/add_expense_screen.dart';
@@ -127,6 +134,41 @@ class AppPages {
       page: () => IgnitionReportScreen(),
       transition: Transition.rightToLeft,
     ),
+    GetPage(
+      name: Routes.acReportScreen,
+      page: () => AcReportScreen(),
+      transition: Transition.rightToLeft,
+    ),
 
+    GetPage(
+      name: Routes.tripReportScreen,
+      page: () => TripReportScreen(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: Routes.stoppageReportScreen,
+      page: () => StoppageReportScreen(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: Routes.summaryReportScreen,
+      page: () => SummaryReportScreen(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: Routes.dailyReportScreen,
+      page: () => DailyReportScreen(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: Routes.overSpeedReportScreen,
+      page: () => OverSpeedReportScreen(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: Routes.geofenceReportScreen,
+      page: () => GeoFenceReportScreen(),
+      transition: Transition.rightToLeft,
+    ),
   ];
 }

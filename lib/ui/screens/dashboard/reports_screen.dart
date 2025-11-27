@@ -64,9 +64,31 @@ class ReportsScreen extends StatelessWidget {
                       final item = reports[index];
                       return GestureDetector(
                         onTap: () {
-                          if( item["title"]=="Ignition Report"){
+                          if (item["title"] == "Ignition Report") {
                             Get.toNamed(Routes.ignitionReportScreen);
                           }
+                          else if (item["title"] == "AC Report") {
+                            Get.toNamed(Routes.acReportScreen);
+                          }
+                          else if (item["title"] == "Trip Report") {
+                            Get.toNamed(Routes.tripReportScreen);
+                          }
+                          else if (item["title"] == "Stoppage Report") {
+                            Get.toNamed(Routes.stoppageReportScreen);
+                          }
+                          else if (item["title"] == "Summary Report") {
+                            Get.toNamed(Routes.summaryReportScreen);
+                          }
+                          else if (item["title"] == "Daily Report") {
+                                Get.toNamed(Routes.dailyReportScreen);
+                          }
+                          else if (item["title"] == "Over Speed Report") {
+                            Get.toNamed(Routes.overSpeedReportScreen);
+                          }
+                          else if (item["title"] == "Geofence Report") {
+                            Get.toNamed(Routes.geofenceReportScreen);
+                          }
+
                           // Navigate to screens here
                           // Get.to(() => IgnitionReportScreen());
                         },
