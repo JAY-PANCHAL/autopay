@@ -1,3 +1,4 @@
+import 'package:autopay/common/utils/image_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,28 +26,28 @@ class _TripReportScreenState extends State<TripReportScreen> {
       "vehicle": "BR01JF1231",
       "time": "Oct 29, 2025 01:19:07 PM",
       "location":
-      "Dhaneshwar Ghat Road, Durgasthan, Nalanda, 803101, Bihar Sharif, India",
+          "Dhaneshwar Ghat Road, Durgasthan, Nalanda, 803101, Bihar Sharif, India",
       "status": "On",
     },
     {
       "vehicle": "BR01JF1231",
       "time": "Oct 29, 2025 01:19:07 PM",
       "location":
-      "Dhaneshwar Ghat Road, Durgasthan, Nalanda, 803101, Bihar Sharif, India",
+          "Dhaneshwar Ghat Road, Durgasthan, Nalanda, 803101, Bihar Sharif, India",
       "status": "Off",
     },
     {
       "vehicle": "BR01JF1231",
       "time": "Oct 29, 2025 01:19:07 PM",
       "location":
-      "Dhaneshwar Ghat Road, Durgasthan, Nalanda, 803101, Bihar Sharif, India",
+          "Dhaneshwar Ghat Road, Durgasthan, Nalanda, 803101, Bihar Sharif, India",
       "status": "On",
     },
     {
       "vehicle": "BR01JF1231",
       "time": "Oct 29, 2025 01:19:07 PM",
       "location":
-      "Dhaneshwar Ghat Road, Durgasthan, Nalanda, 803101, Bihar Sharif, India",
+          "Dhaneshwar Ghat Road, Durgasthan, Nalanda, 803101, Bihar Sharif, India",
       "status": "Off",
     },
   ];
@@ -114,21 +115,20 @@ class _TripReportScreenState extends State<TripReportScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
-                children:  [
+                children: [
                   Container(
                     width: 32,
                     height: 32,
                     decoration: BoxDecoration(
-                      color:AppColors.iconbg,   // 🔥 background color
+                      color: AppColors.iconbg, // 🔥 background color
                       borderRadius: BorderRadius.circular(16), // fully rounded
                     ),
                     child: const Icon(
                       Icons.directions_car,
-                      color: Colors.white,   // 🔥 icon color
+                      color: Colors.white, // 🔥 icon color
                       size: 18,
                     ),
                   ),
-
 
                   //   Icon(Icons.directions_car, color: Colors.orange, size: 26),
                   SizedBox(width: 10),
@@ -170,12 +170,12 @@ class _TripReportScreenState extends State<TripReportScreen> {
                 width: 32,
                 height: 32,
                 decoration: BoxDecoration(
-                  color: AppColors.iconbg,   // 🔥 background color
+                  color: AppColors.iconbg, // 🔥 background color
                   borderRadius: BorderRadius.circular(16), // fully rounded
                 ),
                 child: const Icon(
                   Icons.timer,
-                  color: Colors.white,   // 🔥 icon color
+                  color: Colors.white, // 🔥 icon color
                   size: 18,
                 ),
               ),
@@ -189,23 +189,23 @@ class _TripReportScreenState extends State<TripReportScreen> {
             ],
           ),
 
-
           const SizedBox(height: 18),
 
           // LOCATION
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,   // helps multi-line alignment
+            crossAxisAlignment: CrossAxisAlignment.start,
+            // helps multi-line alignment
             children: [
               Container(
                 width: 32,
                 height: 32,
                 decoration: BoxDecoration(
-                  color: AppColors.iconbg,   // 🔥 background color
+                  color: AppColors.iconbg, // 🔥 background color
                   borderRadius: BorderRadius.circular(16), // fully rounded
                 ),
                 child: const Icon(
                   Icons.location_on,
-                  color: Colors.white,   // 🔥 icon color
+                  color: Colors.white, // 🔥 icon color
                   size: 18,
                 ),
               ),
@@ -225,8 +225,6 @@ class _TripReportScreenState extends State<TripReportScreen> {
               ),
             ],
           ),
-
-
         ],
       ),
     );
@@ -354,15 +352,20 @@ class _TripReportScreenState extends State<TripReportScreen> {
                             child: GestureDetector(
                               onTap: () => pickDate(fromDateCtrl),
                               child: Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 14),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 14,
+                                ),
                                 height: 50,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(12),
-                                  border: Border.all(color: Colors.grey.shade300),
+                                  border: Border.all(
+                                    color: Colors.grey.shade300,
+                                  ),
                                 ),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       fromDateCtrl.text.isEmpty
@@ -380,15 +383,20 @@ class _TripReportScreenState extends State<TripReportScreen> {
                             child: GestureDetector(
                               onTap: () => pickDate(toDateCtrl),
                               child: Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 14),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 14,
+                                ),
                                 height: 50,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(12),
-                                  border: Border.all(color: Colors.grey.shade300),
+                                  border: Border.all(
+                                    color: Colors.grey.shade300,
+                                  ),
                                 ),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       toDateCtrl.text.isEmpty
@@ -409,9 +417,8 @@ class _TripReportScreenState extends State<TripReportScreen> {
                   ),
                 ),
 
-
                 const SizedBox(height: 25),
-// TRIP LIST
+                // TRIP LIST
                 ListView.builder(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
@@ -428,7 +435,7 @@ class _TripReportScreenState extends State<TripReportScreen> {
                             color: Colors.black.withOpacity(0.08),
                             blurRadius: 10,
                             offset: Offset(0, 4),
-                          )
+                          ),
                         ],
                       ),
                       child: Column(
@@ -444,7 +451,11 @@ class _TripReportScreenState extends State<TripReportScreen> {
                                   color: AppColors.iconbg,
                                   borderRadius: BorderRadius.circular(18),
                                 ),
-                                child: Icon(Icons.directions_car, color: Colors.white, size: 20),
+                                child: Icon(
+                                  Icons.directions_car,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
                               ),
                               SizedBox(width: 12),
                               Text(
@@ -454,8 +465,9 @@ class _TripReportScreenState extends State<TripReportScreen> {
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),
-                            //  Spacer(),
-/*
+
+                              //  Spacer(),
+                              /*
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -478,11 +490,9 @@ class _TripReportScreenState extends State<TripReportScreen> {
                                 ],
                               ),
 */
-
                             ],
                           ),
                           SizedBox(height: 18),
-
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -502,13 +512,11 @@ class _TripReportScreenState extends State<TripReportScreen> {
                                 ),
                               ),
                               SizedBox(width: 10),
-                              Icon(Icons.share, size: 18),
+                              Image.asset(AppIcons.marker_distance),
+                             // Icon(Icons.share, size: 18),
                             ],
                           ),
-
-
                           SizedBox(height: 18),
-
                           Text(
                             "Pickup Point",
                             style: TextStyle(
@@ -517,25 +525,26 @@ class _TripReportScreenState extends State<TripReportScreen> {
                             ),
                           ),
                           SizedBox(height: 10),
-
                           // 🟡 PICKUP TIME
                           Row(
                             children: [
-
                               Container(
                                 width: 32,
                                 height: 32,
                                 decoration: BoxDecoration(
-                                  color:AppColors.iconbg,   // 🔥 background color
-                                  borderRadius: BorderRadius.circular(16), // fully rounded
+                                  color: AppColors.iconbg,
+                                  // 🔥 background color
+                                  borderRadius: BorderRadius.circular(
+                                    16,
+                                  ), // fully rounded
                                 ),
                                 child: const Icon(
                                   Icons.access_time,
-                                  color: Colors.white,   // 🔥 icon color
+                                  color: Colors.white, // 🔥 icon color
                                   size: 18,
                                 ),
                               ),
-                             // Icon(Icons.access_time, color: Colors.orange, size: 20),
+                              // Icon(Icons.access_time, color: Colors.orange, size: 20),
                               SizedBox(width: 8),
                               Text(ignitionList[index]["time"]),
                             ],
@@ -550,12 +559,15 @@ class _TripReportScreenState extends State<TripReportScreen> {
                                 width: 32,
                                 height: 32,
                                 decoration: BoxDecoration(
-                                  color:AppColors.iconbg,   // 🔥 background color
-                                  borderRadius: BorderRadius.circular(16), // fully rounded
+                                  color: AppColors.iconbg,
+                                  // 🔥 background color
+                                  borderRadius: BorderRadius.circular(
+                                    16,
+                                  ), // fully rounded
                                 ),
                                 child: const Icon(
                                   Icons.location_on,
-                                  color: Colors.white,   // 🔥 icon color
+                                  color: Colors.white, // 🔥 icon color
                                   size: 18,
                                 ),
                               ),
@@ -588,16 +600,19 @@ class _TripReportScreenState extends State<TripReportScreen> {
                                 width: 32,
                                 height: 32,
                                 decoration: BoxDecoration(
-                                  color:AppColors.iconbg,   // 🔥 background color
-                                  borderRadius: BorderRadius.circular(16), // fully rounded
+                                  color: AppColors.iconbg,
+                                  // 🔥 background color
+                                  borderRadius: BorderRadius.circular(
+                                    16,
+                                  ), // fully rounded
                                 ),
                                 child: const Icon(
                                   Icons.access_time,
-                                  color: Colors.white,   // 🔥 icon color
+                                  color: Colors.white, // 🔥 icon color
                                   size: 18,
                                 ),
                               ),
-                             // Icon(Icons.access_time, color: Colors.orange, size: 20),
+                              // Icon(Icons.access_time, color: Colors.orange, size: 20),
                               SizedBox(width: 8),
                               Text(ignitionList[index]["time"]),
                             ],
@@ -612,17 +627,20 @@ class _TripReportScreenState extends State<TripReportScreen> {
                                 width: 32,
                                 height: 32,
                                 decoration: BoxDecoration(
-                                  color:AppColors.iconbg,   // 🔥 background color
-                                  borderRadius: BorderRadius.circular(16), // fully rounded
+                                  color: AppColors.iconbg,
+                                  // 🔥 background color
+                                  borderRadius: BorderRadius.circular(
+                                    16,
+                                  ), // fully rounded
                                 ),
                                 child: const Icon(
                                   Icons.location_on,
-                                  color: Colors.white,   // 🔥 icon color
+                                  color: Colors.white, // 🔥 icon color
                                   size: 18,
                                 ),
                               ),
 
-                            //  Icon(Icons.location_on, color: Colors.orange, size: 20),
+                              //  Icon(Icons.location_on, color: Colors.orange, size: 20),
                               SizedBox(width: 8),
                               Expanded(
                                 child: Text(

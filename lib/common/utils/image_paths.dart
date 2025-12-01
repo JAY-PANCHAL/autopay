@@ -31,6 +31,7 @@ class AppIcons {
   static const String key = 'assets/images/key.png';
   static const String freeze = 'assets/images/freeze.png';
 
+  static const String marker_distance = 'assets/images/marker_distance.png';
 
 
 }

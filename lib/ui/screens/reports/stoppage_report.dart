@@ -50,6 +50,26 @@ class _StoppageReportScreenState extends State<StoppageReportScreen> {
       "status": "Off",
     },
   ];
+  final List<Map<String, dynamic>> tripList = [
+    {
+      "vehicle": "BR01JF1231",
+      "duration": "0 h 38 m",
+      "startTime": "Oct 29,2025 01:19:07 PM",
+      "endTime": "Oct 29,2025 01:19:07 PM",
+      "address":
+      "Dhaneshwar Ghat Road, Durgasthan, Nalanda, 803101, Bihar Sharif, India",
+      "vehicleIconColor": Color(0xFFB66A0A),
+    },
+    {
+      "vehicle": "BR01JF1231",
+      "duration": "0 h 38 m",
+      "startTime": "Oct 29,2025 01:19:07 PM",
+      "endTime": "Oct 29,2025 01:19:07 PM",
+      "address":
+      "Dhaneshwar Ghat Road, Durgasthan, Nalanda, 803101, Bihar Sharif, India",
+      "vehicleIconColor": Color(0xFF2962FF),
+    },
+  ];
 
   // DATE PICKER FUNCTION
   Future<void> pickDate(TextEditingController controller) async {
@@ -403,6 +423,18 @@ class _StoppageReportScreenState extends State<StoppageReportScreen> {
                           ),
                         ],
                       ),
+                      const SizedBox(height: 25),
+
+                      /*ListView.builder(
+                        padding: const EdgeInsets.all(16),
+                        itemCount: tripList.length,
+                        itemBuilder: (context, index) {
+                          final item = tripList[index];
+                          return tripItem(item);
+                        },
+                      ),*/
+                      ...tripList.map((item) => tripItem(item)),
+
 
                       const SizedBox(height: 25),
                     ],
@@ -411,7 +443,7 @@ class _StoppageReportScreenState extends State<StoppageReportScreen> {
 
 
                 const SizedBox(height: 25),
-                Container(height: 600,)
+               // Container(height: 600,)
 
                 // LIST OF IGNITION RECORDS
               ],
@@ -421,4 +453,127 @@ class _StoppageReportScreenState extends State<StoppageReportScreen> {
       ),
     );
   }
+  Widget tripItem(Map<String, dynamic> item) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 8,
+            offset: Offset(0, 4),
+          )
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  CircleAvatar(
+                    radius: 18,
+                    backgroundColor: item["vehicleIconColor"],
+                    child: Icon(Icons.directions_car, color: Colors.white),
+                  ),
+                  const SizedBox(width: 10),
+                  Text(
+                    item["vehicle"],
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
+                ],
+              ),
+              Text(
+                "Duration: ${item["duration"]}",
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
+              )
+            ],
+          ),
+
+          const SizedBox(height: 16),
+
+          /// START TIME
+          Row(
+            children:  [
+              Container(
+                width: 32,
+                height: 32,
+                decoration: BoxDecoration(
+                  color:  Colors.green,   // 🔥 background color
+                  borderRadius: BorderRadius.circular(16), // fully rounded
+                ),
+                child: const Icon(
+                  Icons.timer,
+                  color: Colors.white,   // 🔥 icon color
+                  size: 18,
+                ),
+              ),
+           //   Icon(Icons.circle, color: Colors.green, size: 16),
+              SizedBox(width: 10),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 26),
+            child: Text(item["startTime"]),
+          ),
+
+          const SizedBox(height: 12),
+
+          /// END TIME
+          Row(
+            children:  [
+              Container(
+                width: 32,
+                height: 32,
+                decoration: BoxDecoration(
+                  color:  Colors.red,   // 🔥 background color
+                  borderRadius: BorderRadius.circular(16), // fully rounded
+                ),
+                child: const Icon(
+                  Icons.timer,
+                  color: Colors.white,   // 🔥 icon color
+                  size: 18,
+                ),
+              ),
+             // Icon(Icons.circle, color: Colors.red, size: 16),
+              SizedBox(width: 10),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 26),
+            child: Text(item["endTime"]),
+          ),
+
+          const SizedBox(height: 12),
+
+          /// ADDRESS
+          Row(
+            children: const [
+              Icon(Icons.location_on, color: Colors.brown, size: 20),
+              SizedBox(width: 10),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 28),
+            child: Text(
+              item["address"],
+              style: const TextStyle(fontSize: 14),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
 }
