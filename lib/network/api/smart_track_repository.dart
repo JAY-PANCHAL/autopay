@@ -7,11 +7,7 @@ import '../../common/utils/storage_service.dart';
 import '../../routes/app_pages.dart';
 import '../constant/endpoints.dart';
 import '../dio/dio_exception.dart';
-import '../model/emp_details_model.dart';
-import '../model/login_model.dart';
-import '../model/qc_details_model.dart';
-import '../model/sub_process_model.dart';
-import '../model/todays_status_model.dart';
+
 
 class SmartTrackRepository {
   final SmartTrackApi smartTrackApi;
@@ -19,7 +15,7 @@ class SmartTrackRepository {
 
   SmartTrackRepository(this.smartTrackApi);
 
-  Future<LoginModel> login(params) async {
+ /* Future<LoginModel> login(params) async {
     try {
       final response = await smartTrackApi.loadPostData(
         Endpoints.login,
@@ -49,5 +45,5 @@ class SmartTrackRepository {
       if (errorMessage == "Bad request") {}
       throw errorMessage;
     }
-  }
+  }*/
 }

@@ -20,34 +20,27 @@ class _OverSpeedReportScreenState extends State<OverSpeedReportScreen> {
   String selectedFilter = "Today";
 
   // SAMPLE LIST
-  List<Map<String, dynamic>> ignitionList = [
+  final List<Map<String, dynamic>> speedAlerts = [
     {
-      "vehicle": "BR01JF1231",
-      "time": "Oct 29, 2025 01:19:07 PM",
+      "vehicleNo": "BR01JF1231",
+      "speed": 91.00,
+      "dateTime": "Oct 29,2025 01:19:07 PM",
       "location":
       "Dhaneshwar Ghat Road, Durgasthan, Nalanda, 803101, Bihar Sharif, India",
-      "status": "On",
     },
     {
-      "vehicle": "BR01JF1231",
-      "time": "Oct 29, 2025 01:19:07 PM",
+      "vehicleNo": "BR09AB8877",
+      "speed": 86.50,
+      "dateTime": "Oct 29,2025 03:11:12 PM",
       "location":
-      "Dhaneshwar Ghat Road, Durgasthan, Nalanda, 803101, Bihar Sharif, India",
-      "status": "Off",
+      "Kankarbagh Main Road, Patna, Bihar, India",
     },
     {
-      "vehicle": "BR01JF1231",
-      "time": "Oct 29, 2025 01:19:07 PM",
+      "vehicleNo": "BR22XY4411",
+      "speed": 78.00,
+      "dateTime": "Oct 29,2025 07:55:01 PM",
       "location":
-      "Dhaneshwar Ghat Road, Durgasthan, Nalanda, 803101, Bihar Sharif, India",
-      "status": "On",
-    },
-    {
-      "vehicle": "BR01JF1231",
-      "time": "Oct 29, 2025 01:19:07 PM",
-      "location":
-      "Dhaneshwar Ghat Road, Durgasthan, Nalanda, 803101, Bihar Sharif, India",
-      "status": "Off",
+      "Rajgir Road, Nalanda, Bihar, India",
     },
   ];
 
@@ -411,13 +404,147 @@ class _OverSpeedReportScreenState extends State<OverSpeedReportScreen> {
 
 
                 const SizedBox(height: 25),
-                Container(height: 600,)
+                ...speedAlerts.map((item) => listitem1(item)),
+
+              /*  ListView.builder(
+              padding: EdgeInsets.all(16),
+              itemCount: speedAlerts.length,
+              itemBuilder: (context, index) {
+                final item = speedAlerts[index];
+
+
+              },
+            ),*/
 
                 // LIST OF IGNITION RECORDS
               ],
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget listitem1(item){
+    return Container(
+      margin: EdgeInsets.only(bottom: 16),
+      padding: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 6,
+            offset: Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 32,
+                height: 32,
+                decoration: BoxDecoration(
+                  color:AppColors.iconbg,   // 🔥 background color
+                  borderRadius: BorderRadius.circular(16), // fully rounded
+                ),
+                child: const Icon(
+                  Icons.directions_car,
+                  color: Colors.white,   // 🔥 icon color
+                  size: 18,
+                ),
+              ),
+
+              SizedBox(width: 10),
+              Text(
+                item["vehicleNo"],
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Spacer(),
+              Row(
+                children: [
+                  Icon(Icons.speed, color: Colors.red, size: 20),
+                  SizedBox(width: 4),
+                  Text(
+                    "${item['speed']}Kmph",
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+
+          SizedBox(height: 16),
+
+          // DATE ROW
+          Row(
+            children: [
+              Container(
+                width: 26,
+                height: 26,
+                decoration: BoxDecoration(
+                  color:Colors.red,   // 🔥 background color
+                  borderRadius: BorderRadius.circular(16), // fully rounded
+                ),
+                child: const Icon(
+                  Icons.access_time,
+                  color: Colors.white,   // 🔥 icon color
+                  size: 18,
+                ),
+              ),
+
+            //  Icon(Icons.access_time, color: Colors.red, size: 20),
+              SizedBox(width: 10),
+              Text(
+                item["dateTime"],
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+              ),
+            ],
+          ),
+
+          SizedBox(height: 16),
+
+          // LOCATION ROW
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 26,
+                height: 26,
+                decoration: BoxDecoration(
+                  color:AppColors.iconbg,   // 🔥 background color
+                  borderRadius: BorderRadius.circular(16), // fully rounded
+                ),
+                child: const Icon(
+                  Icons.location_on,
+                  color: Colors.white,   // 🔥 icon color
+                  size: 18,
+                ),
+              ),
+
+             /* Icon(Icons.location_on,
+                  color: Colors.brown.shade400, size: 22),
+          */    SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  item["location"],
+                  style: TextStyle(fontSize: 14),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

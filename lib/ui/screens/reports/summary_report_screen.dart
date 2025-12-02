@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../common/utils/color_constants.dart';
+import '../../../network/model/summary_report_model.dart';
 
 class SummaryReportScreen extends StatefulWidget {
   const SummaryReportScreen({super.key});
@@ -20,35 +21,39 @@ class _SummaryReportScreenState extends State<SummaryReportScreen> {
   String selectedFilter = "Today";
 
   // SAMPLE LIST
-  List<Map<String, dynamic>> ignitionList = [
-    {
-      "vehicle": "BR01JF1231",
-      "time": "Oct 29, 2025 01:19:07 PM",
-      "location":
-      "Dhaneshwar Ghat Road, Durgasthan, Nalanda, 803101, Bihar Sharif, India",
-      "status": "On",
-    },
-    {
-      "vehicle": "BR01JF1231",
-      "time": "Oct 29, 2025 01:19:07 PM",
-      "location":
-      "Dhaneshwar Ghat Road, Durgasthan, Nalanda, 803101, Bihar Sharif, India",
-      "status": "Off",
-    },
-    {
-      "vehicle": "BR01JF1231",
-      "time": "Oct 29, 2025 01:19:07 PM",
-      "location":
-      "Dhaneshwar Ghat Road, Durgasthan, Nalanda, 803101, Bihar Sharif, India",
-      "status": "On",
-    },
-    {
-      "vehicle": "BR01JF1231",
-      "time": "Oct 29, 2025 01:19:07 PM",
-      "location":
-      "Dhaneshwar Ghat Road, Durgasthan, Nalanda, 803101, Bihar Sharif, India",
-      "status": "Off",
-    },
+  final List<SummaryReportModel> stoppageList = [
+    SummaryReportModel(
+      vehicleNo: "BR01JF1231",
+      distanceKm: 60.48,
+      engineHours: "01:19:07 hrs",
+      runningHours: "01:19:07 hrs",
+      stopHours: "01:19:07 hrs",
+      idleHours: "01:19:07 hrs",
+      startLocation:
+          "Dhaneshwar Ghat Road, Durgasthan, Nalanda, 803101, Bihar Sharif, India",
+      endLocation:
+          "Dhaneshwar Ghat Road, Durgasthan, Nalanda, 803101, Bihar Sharif, India",
+      startingKm: "000023815",
+      endingKm: "000023875",
+      avgSpeed: 45.57,
+      maxSpeed: 86,
+      fuelSpent: 0,
+    ),
+    SummaryReportModel(
+      vehicleNo: "BR02MJ9982",
+      distanceKm: 42.12,
+      engineHours: "00:52:44 hrs",
+      runningHours: "00:30:20 hrs",
+      stopHours: "00:11:13 hrs",
+      idleHours: "00:11:11 hrs",
+      startLocation: "Gandhi Maidan, Patna, Bihar, India",
+      endLocation: "Rajendra Nagar, Patna, Bihar, India",
+      startingKm: "000045710",
+      endingKm: "000045755",
+      avgSpeed: 38.4,
+      maxSpeed: 72,
+      fuelSpent: 1.2,
+    ),
   ];
 
   // DATE PICKER FUNCTION
@@ -114,21 +119,20 @@ class _SummaryReportScreenState extends State<SummaryReportScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
-                children:  [
+                children: [
                   Container(
                     width: 32,
                     height: 32,
                     decoration: BoxDecoration(
-                      color:AppColors.iconbg,   // 🔥 background color
+                      color: AppColors.iconbg, // 🔥 background color
                       borderRadius: BorderRadius.circular(16), // fully rounded
                     ),
                     child: const Icon(
                       Icons.directions_car,
-                      color: Colors.white,   // 🔥 icon color
+                      color: Colors.white, // 🔥 icon color
                       size: 18,
                     ),
                   ),
-
 
                   //   Icon(Icons.directions_car, color: Colors.orange, size: 26),
                   SizedBox(width: 10),
@@ -170,12 +174,12 @@ class _SummaryReportScreenState extends State<SummaryReportScreen> {
                 width: 32,
                 height: 32,
                 decoration: BoxDecoration(
-                  color: AppColors.iconbg,   // 🔥 background color
+                  color: AppColors.iconbg, // 🔥 background color
                   borderRadius: BorderRadius.circular(16), // fully rounded
                 ),
                 child: const Icon(
                   Icons.timer,
-                  color: Colors.white,   // 🔥 icon color
+                  color: Colors.white, // 🔥 icon color
                   size: 18,
                 ),
               ),
@@ -189,23 +193,23 @@ class _SummaryReportScreenState extends State<SummaryReportScreen> {
             ],
           ),
 
-
           const SizedBox(height: 18),
 
           // LOCATION
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,   // helps multi-line alignment
+            crossAxisAlignment: CrossAxisAlignment.start,
+            // helps multi-line alignment
             children: [
               Container(
                 width: 32,
                 height: 32,
                 decoration: BoxDecoration(
-                  color: AppColors.iconbg,   // 🔥 background color
+                  color: AppColors.iconbg, // 🔥 background color
                   borderRadius: BorderRadius.circular(16), // fully rounded
                 ),
                 child: const Icon(
                   Icons.location_on,
-                  color: Colors.white,   // 🔥 icon color
+                  color: Colors.white, // 🔥 icon color
                   size: 18,
                 ),
               ),
@@ -225,8 +229,6 @@ class _SummaryReportScreenState extends State<SummaryReportScreen> {
               ),
             ],
           ),
-
-
         ],
       ),
     );
@@ -354,15 +356,20 @@ class _SummaryReportScreenState extends State<SummaryReportScreen> {
                             child: GestureDetector(
                               onTap: () => pickDate(fromDateCtrl),
                               child: Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 14),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 14,
+                                ),
                                 height: 50,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(12),
-                                  border: Border.all(color: Colors.grey.shade300),
+                                  border: Border.all(
+                                    color: Colors.grey.shade300,
+                                  ),
                                 ),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       fromDateCtrl.text.isEmpty
@@ -380,15 +387,20 @@ class _SummaryReportScreenState extends State<SummaryReportScreen> {
                             child: GestureDetector(
                               onTap: () => pickDate(toDateCtrl),
                               child: Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 14),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 14,
+                                ),
                                 height: 50,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(12),
-                                  border: Border.all(color: Colors.grey.shade300),
+                                  border: Border.all(
+                                    color: Colors.grey.shade300,
+                                  ),
                                 ),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       toDateCtrl.text.isEmpty
@@ -409,9 +421,17 @@ class _SummaryReportScreenState extends State<SummaryReportScreen> {
                   ),
                 ),
 
-
                 const SizedBox(height: 25),
-                Container(height: 600,)
+                /*  ListView.builder(
+                  padding: EdgeInsets.all(16),
+                  itemCount: tripList.length,
+                  itemBuilder: (context, index) {
+                    return VehicleTripCard( tripList[index]);
+                  },
+                ),*/
+                ...stoppageList.map((item) => VehicleTripCard(item)),
+
+                //  Container(height: 600,)
 
                 // LIST OF IGNITION RECORDS
               ],
@@ -419,6 +439,170 @@ class _SummaryReportScreenState extends State<SummaryReportScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget VehicleTripCard(SummaryReportModel trip) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 16),
+      padding: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 6,
+            offset: Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Vehicle + Distance
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Icon(Icons.directions_car, color: Colors.brown, size: 30),
+                  SizedBox(width: 8),
+                  Text(
+                    trip.vehicleNo,
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Icon(Icons.route, size: 20, color: Colors.orange),
+                  SizedBox(width: 4),
+                  Text(
+                    "${trip.distanceKm} km",
+                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+                  ),
+                ],
+              ),
+            ],
+          ),
+
+          SizedBox(height: 12),
+          Divider(),
+
+          // Hours Section
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _hours("Engine hours", trip.engineHours, Colors.purple),
+              _hours("Running", trip.runningHours, Colors.green),
+              _hours("Stop", trip.stopHours, Colors.red),
+              _hours("Idle", trip.idleHours, Colors.amber),
+            ],
+          ),
+
+          SizedBox(height: 12),
+          Divider(),
+
+          // Start Location
+          Row(
+            children: [
+              Icon(Icons.location_on, color: Colors.green),
+              SizedBox(width: 6),
+              Expanded(
+                child: Text(trip.startLocation, style: TextStyle(fontSize: 13)),
+              ),
+            ],
+          ),
+
+          SizedBox(height: 10),
+
+          // KM Boxes
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _kmBox("Starting KM", trip.startingKm, Colors.green.shade100),
+              Icon(Icons.more_horiz, color: Colors.grey),
+              _kmBox("Ending KM", trip.endingKm, Colors.red.shade100),
+            ],
+          ),
+
+          SizedBox(height: 10),
+
+          // End Location
+          Row(
+            children: [
+              Icon(Icons.location_on, color: Colors.red),
+              SizedBox(width: 6),
+              Expanded(
+                child: Text(trip.endLocation, style: TextStyle(fontSize: 13)),
+              ),
+            ],
+          ),
+
+          SizedBox(height: 12),
+          Divider(),
+
+          // Bottom Stats
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                _stat(Icons.speed, "Avg: ${trip.avgSpeed} kmph"),
+                const SizedBox(width: 16),
+                _stat(Icons.flash_on, "Max.speed: ${trip.maxSpeed} kmph"),
+                const SizedBox(width: 16),
+                _stat(
+                  Icons.local_gas_station,
+                  "Fuel Spent : ${trip.fuelSpent} L",
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _hours(String title, String time, Color color) {
+    return Column(
+      children: [
+        Text(title, style: TextStyle(fontSize: 12, color: Colors.black54)),
+        SizedBox(height: 4),
+        Container(width: 60, height: 3, color: color),
+        SizedBox(height: 4),
+        Text(time, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500)),
+      ],
+    );
+  }
+
+  Widget _kmBox(String title, String km, Color bg) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: BoxDecoration(
+        color: bg,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        children: [
+          Text(title, style: TextStyle(fontSize: 12, color: Colors.black54)),
+          SizedBox(height: 4),
+          Text(km, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
+        ],
+      ),
+    );
+  }
+
+  Widget _stat(IconData icon, String text) {
+    return Row(
+      children: [
+        Icon(icon, size: 20, color: Colors.orange),
+        SizedBox(width: 4),
+        Text(
+          text,
+          style: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w500),
+        ),
+      ],
     );
   }
 }

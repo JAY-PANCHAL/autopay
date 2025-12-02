@@ -476,10 +476,18 @@ class _StoppageReportScreenState extends State<StoppageReportScreen> {
             children: [
               Row(
                 children: [
-                  CircleAvatar(
-                    radius: 18,
-                    backgroundColor: item["vehicleIconColor"],
-                    child: Icon(Icons.directions_car, color: Colors.white),
+                  Container(
+                    width: 32,
+                    height: 32,
+                    decoration: BoxDecoration(
+                      color:AppColors.iconbg,   // 🔥 background color
+                      borderRadius: BorderRadius.circular(16), // fully rounded
+                    ),
+                    child: const Icon(
+                      Icons.directions_car,
+                      color: Colors.white,   // 🔥 icon color
+                      size: 18,
+                    ),
                   ),
                   const SizedBox(width: 10),
                   Text(
@@ -507,8 +515,8 @@ class _StoppageReportScreenState extends State<StoppageReportScreen> {
           Row(
             children:  [
               Container(
-                width: 32,
-                height: 32,
+                width: 26,
+                height: 26,
                 decoration: BoxDecoration(
                   color:  Colors.green,   // 🔥 background color
                   borderRadius: BorderRadius.circular(16), // fully rounded
@@ -521,11 +529,9 @@ class _StoppageReportScreenState extends State<StoppageReportScreen> {
               ),
            //   Icon(Icons.circle, color: Colors.green, size: 16),
               SizedBox(width: 10),
+              Text(item["startTime"]),
+
             ],
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 26),
-            child: Text(item["startTime"]),
           ),
 
           const SizedBox(height: 12),
@@ -534,8 +540,8 @@ class _StoppageReportScreenState extends State<StoppageReportScreen> {
           Row(
             children:  [
               Container(
-                width: 32,
-                height: 32,
+                width: 26,
+                height: 26,
                 decoration: BoxDecoration(
                   color:  Colors.red,   // 🔥 background color
                   borderRadius: BorderRadius.circular(16), // fully rounded
@@ -548,29 +554,40 @@ class _StoppageReportScreenState extends State<StoppageReportScreen> {
               ),
              // Icon(Icons.circle, color: Colors.red, size: 16),
               SizedBox(width: 10),
+              Text(item["endTime"]),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 26),
-            child: Text(item["endTime"]),
-          ),
+
 
           const SizedBox(height: 12),
 
           /// ADDRESS
           Row(
-            children: const [
-              Icon(Icons.location_on, color: Colors.brown, size: 20),
+            children:  [
+              Container(
+                width: 26,
+                height: 26,
+                decoration: BoxDecoration(
+                  color:AppColors.iconbg,   // 🔥 background color
+                  borderRadius: BorderRadius.circular(16), // fully rounded
+                ),
+                child: const Icon(
+                  Icons.location_on,
+                  color: Colors.white,   // 🔥 icon color
+                  size: 18,
+                ),
+              ),
+             // Icon(Icons.location_on, color: Colors.brown, size: 20),
               SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  item["address"],
+                  style: const TextStyle(fontSize: 14),
+                ),
+              ),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 28),
-            child: Text(
-              item["address"],
-              style: const TextStyle(fontSize: 14),
-            ),
-          ),
+
         ],
       ),
     );
