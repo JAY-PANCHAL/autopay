@@ -35,7 +35,9 @@ abstract class Routes {
   static const overSpeedReportScreen = '/overSpeedReportScreen';
   static const geofenceReportScreen = '/geofenceReportScreen';
 
+  static const notificationScreen = '/notificationScreen';
 
+  static const vehicleDetailsScreen = '/vehicleDetailsScreen';
 
 
 }

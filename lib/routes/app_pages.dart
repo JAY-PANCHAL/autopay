@@ -10,8 +10,10 @@ import 'package:autopay/ui/screens/settings/geofence_map_screen.dart';
 import 'package:autopay/ui/screens/signup/otp_verify_screen.dart';
 import 'package:autopay/ui/screens/signup/signup_dealer_screen.dart';
 import 'package:autopay/ui/screens/signup/signup_vendor_screen.dart';
+import 'package:autopay/ui/screens/vehicles/vehile_details_screen.dart';
 import 'package:get/get.dart';
 import '../ui/screens/dashboard/dashboard_screen.dart';
+import '../ui/screens/dashboard/notification_list.dart';
 import '../ui/screens/reports/ac_report.dart';
 import '../ui/screens/reports/ignition_report.dart';
 import '../ui/screens/settings/add_customers_screen.dart';
@@ -170,5 +172,17 @@ class AppPages {
       page: () => GeoFenceReportScreen(),
       transition: Transition.rightToLeft,
     ),
+
+    GetPage(
+      name: Routes.notificationScreen,
+      page: () => NotificationScreen(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: Routes.vehicleDetailsScreen,
+      page: () => VehicleMapScreen(),
+      transition: Transition.rightToLeft,
+    ),
+
   ];
 }

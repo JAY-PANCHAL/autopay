@@ -7,7 +7,8 @@ import 'package:get/get.dart';
 import 'package:timelines_plus/timelines_plus.dart';
 
 import '../../../common/utils/color_constants.dart';
-import '../../../controller/home_screen_controller.dart'; // Import the new package
+import '../../../controller/home_screen_controller.dart';
+import '../../../routes/app_pages.dart'; // Import the new package
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -37,24 +38,36 @@ class HomeScreen extends StatelessWidget {
             child: SingleChildScrollView(
               physics: const AlwaysScrollableScrollPhysics(),
               padding: EdgeInsets.all(16.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding:  EdgeInsets.only(top:18.0.sp,bottom: 16.sp,left: 12.sp),
-                    child: Text(
-                      "Vehicle List",
-                      style: Styles.textFontRegular(size: 20, weight: FontWeight.w500)
+              child: SafeArea(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding:  EdgeInsets.only(bottom: 16.0.sp),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Vehicle List",
+                            style: Styles.textFontRegular(size: 20, weight: FontWeight.w500)
+                          ),
+                          Spacer(),
+                          GestureDetector(
+                              onTap: (){
+                                Get.toNamed(Routes.notificationScreen);
+                              },
+                              child: Icon(Icons.notifications,color: AppColors.appblue,size: 25.sp,))
+                        ],
+                      ),
                     ),
-                  ),
-                  // Horizontal Stats
-                  _buildTopStats(controller),
-                  SizedBox(height: 16.h),
-                  // Vehicle Cards
-                  ...controller.vehicleList
-                      .map((vehicle) => _buildVehicleCard(vehicle))
-                      .toList(),
-                ],
+                    // Horizontal Stats
+                    _buildTopStats(controller),
+                    SizedBox(height: 16.h),
+                    // Vehicle Cards
+                    ...controller.vehicleList
+                        .map((vehicle) => _buildVehicleCard(vehicle))
+                        .toList(),
+                  ],
+                ),
               ),
             ),
           ),
@@ -202,218 +215,223 @@ class HomeScreen extends StatelessWidget {
       },
     ];
 
-    return Container(
-      margin: EdgeInsets.only(bottom: 16.h),
-      padding: EdgeInsets.all(12.w),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16.r),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              // 🚗 Vehicle image
-              Column(
-                children: [
-                  Image.asset(
-                    vehicle["iconPath"],
-                    width: 70.w,
-                    height: 70.w,
-                    fit: BoxFit.contain,
-                  ),
-                  Utils.addGap(30),
-                  // Assuming a dark or colored background
-                  Text(
-                    "00",
-                    style: Styles.textFontBold(
-                      size: 16,
-                      weight: FontWeight.w700,
-                    ),
-                  ),
-                  Text(
-                    "KMH",
-                    style: Styles.textFontRegular(
-                      size: 14,
-                      weight: FontWeight.w400,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(width: 16.w),
-
-              // 📍 Timeline and details
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  // CrossAxisAlignment is critical here to align the top of the timeline
-                  crossAxisAlignment: CrossAxisAlignment.start,
+    return GestureDetector(
+      onTap: (){
+        Get.toNamed(Routes.vehicleDetailsScreen);
+      },
+      child: Container(
+        margin: EdgeInsets.only(bottom: 16.h),
+        padding: EdgeInsets.all(12.w),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16.r),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                // 🚗 Vehicle image
+                Column(
                   children: [
-                    // --- TIMELINE WIDGET ---
-                    Timeline.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: timelineData.length,
-                      // 🔑 FIX 1: Set Timeline padding to zero to eliminate default top/bottom padding
-                      padding: EdgeInsets.zero,
-                      itemBuilder: (context, index) {
-                        final item = timelineData[index];
-                        final isLast = index == timelineData.length - 1;
-                        final isFirst = index == 0;
-
-                        // --- 1. Define the Content (Text) ---
-                        final content = Padding(
-                          padding: EdgeInsets.only(
-                            bottom: isLast ? 0 : 12.h,
-                            left: 8.w,
-                            // 🔑 FIX 2: Remove top padding from the first content item if desired
-                            top: isFirst ? 0 : 0.h,
-                          ),
-                          child: Text(
-                            item["text"],
-                            textAlign: TextAlign.start,
-                            style: item["isHeader"]
-                                ? TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 12.sp,
-                                  )
-                                : TextStyle(
-                                    fontSize: 10.sp,
-
-                                    color: Colors.black.withOpacity(0.8),
-                                  ),
-                            maxLines: 3,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        );
-
-                        // --- 2. Define the Node (Indicator and Connectors) ---
-                        final timelineNode = TimelineNode(
-                          indicator: _TimelineIndicator(
-                            icon: item["icon"],
-                            color: color,
-                          ),
-                          startConnector: isFirst
-                              ? null
-                              : SizedBox(
-                                  height: 10.0.sp,
-                                  child: DashedLineConnector(
-                                    color: color,
-                                    thickness: 1.5,
-                                    gap: 6.0, // space between dashes
-                                    dash: 6.0, // length of each dash
-                                  ),
-                                ),
-                          endConnector: isLast
-                              ? null
-                              : SizedBox(
-                                  height: 10.0.sp,
-                                  child: DashedLineConnector(
-                                    color: color,
-                                    thickness: 1.5,
-                                    gap: 6.0, // space between dashes
-                                    dash: 6.0, // length of each dash
-                                  ),
-                                ),
-                        );
-
-                        // --- 3. Return the TimelineTile ---
-                        return TimelineTile(
-                          // 🔑 FIX 3: Remove default TimelineTile top and bottom padding
-                          nodeAlign: TimelineNodeAlign.start,
-                          // Set item extent to control vertical spacing, or keep it null
-                          // to let content define height (preferred for wrapping text).
-
-                          // You can try setting hasIndicator to false for the first item
-                          // and placing the indicator manually inside contents, but
-                          // for simplicity, we'll stick to TimelineTile structure.
-
-                          // 🔑 FIX 4: Explicitly align the node/indicator to the start
-                          // and ensure TimelineTile does not add its own default top/bottom margin.
-                          // The main control is the Timeline.builder's padding: EdgeInsets.zero.
-
-                          // The timeline component implicitly adds height. If the gap remains,
-                          // you might need to manually set the vertical margin on the node itself.
-                          node: timelineNode,
-                          contents: content,
-                        );
-                      },
+                    Image.asset(
+                      vehicle["iconPath"],
+                      width: 70.w,
+                      height: 70.w,
+                      fit: BoxFit.contain,
                     ),
-
-                    // --- END TIMELINE WIDGET ---
-                    SizedBox(height: 10.h),
-
-                    // ⚙️ Action Icons Row
+                    Utils.addGap(30),
+                    // Assuming a dark or colored background
+                    Text(
+                      "00",
+                      style: Styles.textFontBold(
+                        size: 16,
+                        weight: FontWeight.w700,
+                      ),
+                    ),
+                    Text(
+                      "KMH",
+                      style: Styles.textFontRegular(
+                        size: 14,
+                        weight: FontWeight.w400,
+                      ),
+                    ),
                   ],
                 ),
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              GestureDetector(
-                child: Image.asset(
-                  AppIcons.freeze,
-                  height: 30.sp,
-                  width: 30.sp,
-                  fit: BoxFit.cover,
+                SizedBox(width: 16.w),
+
+                // 📍 Timeline and details
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    // CrossAxisAlignment is critical here to align the top of the timeline
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // --- TIMELINE WIDGET ---
+                      Timeline.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: timelineData.length,
+                        // 🔑 FIX 1: Set Timeline padding to zero to eliminate default top/bottom padding
+                        padding: EdgeInsets.zero,
+                        itemBuilder: (context, index) {
+                          final item = timelineData[index];
+                          final isLast = index == timelineData.length - 1;
+                          final isFirst = index == 0;
+
+                          // --- 1. Define the Content (Text) ---
+                          final content = Padding(
+                            padding: EdgeInsets.only(
+                              bottom: isLast ? 0 : 12.h,
+                              left: 8.w,
+                              // 🔑 FIX 2: Remove top padding from the first content item if desired
+                              top: isFirst ? 0 : 0.h,
+                            ),
+                            child: Text(
+                              item["text"],
+                              textAlign: TextAlign.start,
+                              style: item["isHeader"]
+                                  ? TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12.sp,
+                                    )
+                                  : TextStyle(
+                                      fontSize: 10.sp,
+
+                                      color: Colors.black.withOpacity(0.8),
+                                    ),
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          );
+
+                          // --- 2. Define the Node (Indicator and Connectors) ---
+                          final timelineNode = TimelineNode(
+                            indicator: _TimelineIndicator(
+                              icon: item["icon"],
+                              color: color,
+                            ),
+                            startConnector: isFirst
+                                ? null
+                                : SizedBox(
+                                    height: 10.0.sp,
+                                    child: DashedLineConnector(
+                                      color: color,
+                                      thickness: 1.5,
+                                      gap: 6.0, // space between dashes
+                                      dash: 6.0, // length of each dash
+                                    ),
+                                  ),
+                            endConnector: isLast
+                                ? null
+                                : SizedBox(
+                                    height: 10.0.sp,
+                                    child: DashedLineConnector(
+                                      color: color,
+                                      thickness: 1.5,
+                                      gap: 6.0, // space between dashes
+                                      dash: 6.0, // length of each dash
+                                    ),
+                                  ),
+                          );
+
+                          // --- 3. Return the TimelineTile ---
+                          return TimelineTile(
+                            // 🔑 FIX 3: Remove default TimelineTile top and bottom padding
+                            nodeAlign: TimelineNodeAlign.start,
+                            // Set item extent to control vertical spacing, or keep it null
+                            // to let content define height (preferred for wrapping text).
+
+                            // You can try setting hasIndicator to false for the first item
+                            // and placing the indicator manually inside contents, but
+                            // for simplicity, we'll stick to TimelineTile structure.
+
+                            // 🔑 FIX 4: Explicitly align the node/indicator to the start
+                            // and ensure TimelineTile does not add its own default top/bottom margin.
+                            // The main control is the Timeline.builder's padding: EdgeInsets.zero.
+
+                            // The timeline component implicitly adds height. If the gap remains,
+                            // you might need to manually set the vertical margin on the node itself.
+                            node: timelineNode,
+                            contents: content,
+                          );
+                        },
+                      ),
+
+                      // --- END TIMELINE WIDGET ---
+                      SizedBox(height: 10.h),
+
+                      // ⚙️ Action Icons Row
+                    ],
+                  ),
                 ),
-              ),
-              GestureDetector(
-                child: Image.asset(
-                  AppIcons.key,
-                  height: 30.sp,
-                  width: 30.sp,
-                  fit: BoxFit.cover,
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                GestureDetector(
+                  child: Image.asset(
+                    AppIcons.freeze,
+                    height: 30.sp,
+                    width: 30.sp,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-              GestureDetector(
-                child: Image.asset(
-                  AppIcons.power,
-                  height: 30.sp,
-                  width: 30.sp,
-                  fit: BoxFit.cover,
+                GestureDetector(
+                  child: Image.asset(
+                    AppIcons.key,
+                    height: 30.sp,
+                    width: 30.sp,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-              GestureDetector(
-                child: Image.asset(
-                  AppIcons.setellite,
-                  height: 30.sp,
-                  width: 30.sp,
-                  fit: BoxFit.cover,
+                GestureDetector(
+                  child: Image.asset(
+                    AppIcons.power,
+                    height: 30.sp,
+                    width: 30.sp,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-              GestureDetector(
-                child: Image.asset(
-                  AppIcons.calendar,
-                  height: 30.sp,
-                  width: 30.sp,
-                  fit: BoxFit.cover,
+                GestureDetector(
+                  child: Image.asset(
+                    AppIcons.setellite,
+                    height: 30.sp,
+                    width: 30.sp,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-              GestureDetector(
-                child: Image.asset(
-                  AppIcons.more,
-                  height: 30.sp,
-                  width: 30.sp,
-                  fit: BoxFit.cover,
+                GestureDetector(
+                  child: Image.asset(
+                    AppIcons.calendar,
+                    height: 30.sp,
+                    width: 30.sp,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ],
+                GestureDetector(
+                  child: Image.asset(
+                    AppIcons.more,
+                    height: 30.sp,
+                    width: 30.sp,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
