@@ -10,7 +10,7 @@ final getIt = GetIt.instance;
 Future<void> setup() async {
   getIt.registerSingleton(Dio());
   getIt.registerSingleton(DioClient(getIt<Dio>()));
-  getIt.registerSingleton(SmartTrackApi(dioClient: getIt<DioClient>()));
-  getIt.registerSingleton(SmartTrackRepository(getIt.get<SmartTrackApi>()));
+  getIt.registerSingleton(AutomapApi(dioClient: getIt<DioClient>()));
+  getIt.registerSingleton(AutomapRepository(getIt.get<AutomapApi>()));
   // getIt.registerSingleton(HomeController());
 }

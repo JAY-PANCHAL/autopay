@@ -6,11 +6,11 @@ import '../../common/utils/utility.dart';
 import '../../routes/app_pages.dart';
 import '../dio/dio_client.dart';
 
-class SmartTrackApi {
+class AutomapApi {
   final DioClient dioClient;
   final storageService = StorageService();
 
-  SmartTrackApi({required this.dioClient});
+  AutomapApi({required this.dioClient});
 
   Future<Response> loadPostFormData(endpoint, body, params, token) async {
     Dio dio = new Dio();

@@ -53,25 +53,27 @@ class _VehicleMapScreenState extends State<VehicleMapScreen> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: icons
-              .map((ic) => Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Material(
-              color: Colors.white,
-              shape: const CircleBorder(),
-              elevation: 2,
-              child: InkWell(
-                customBorder: const CircleBorder(),
-                onTap: () {
-                  // replace with your action
-                  debugPrint('Tapped quick action $ic');
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(ic, color: Colors.brown, size: 22),
+              .map(
+                (ic) => Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Material(
+                    color: Colors.white,
+                    shape: const CircleBorder(),
+                    elevation: 2,
+                    child: InkWell(
+                      customBorder: const CircleBorder(),
+                      onTap: () {
+                        // replace with your action
+                        debugPrint('Tapped quick action $ic');
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(ic, color: Colors.brown, size: 22),
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ))
+              )
               .toList(),
         ),
       ),
@@ -97,8 +99,9 @@ class _VehicleMapScreenState extends State<VehicleMapScreen> {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-                color: Colors.brown.shade200,
-                borderRadius: BorderRadius.circular(10)),
+              color: Colors.brown.shade200,
+              borderRadius: BorderRadius.circular(10),
+            ),
             child: const Icon(Icons.directions_car, color: Colors.white),
           ),
           const SizedBox(width: 12),
@@ -106,12 +109,15 @@ class _VehicleMapScreenState extends State<VehicleMapScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(v.vehicleNo,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w700, fontSize: 16)),
+                Text(
+                  v.vehicleNo,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16,
+                  ),
+                ),
                 const SizedBox(height: 2),
-                Text(v.location,
-                    maxLines: 1, overflow: TextOverflow.ellipsis),
+                Text(v.location, maxLines: 1, overflow: TextOverflow.ellipsis),
               ],
             ),
           ),
@@ -130,9 +136,13 @@ class _VehicleMapScreenState extends State<VehicleMapScreen> {
             children: [
               const Icon(Icons.speed, color: Colors.brown),
               const SizedBox(height: 4),
-              Text("${v.todayKm.toStringAsFixed(2)} km",
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w700, color: Colors.black)),
+              Text(
+                "${v.todayKm.toStringAsFixed(2)} km",
+                style: const TextStyle(
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black,
+                ),
+              ),
             ],
           ),
         ],
@@ -148,9 +158,7 @@ class _VehicleMapScreenState extends State<VehicleMapScreen> {
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.vertical(top: Radius.circular(18)),
-        boxShadow: [
-          BoxShadow(color: Colors.black26, blurRadius: 10),
-        ],
+        boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 10)],
       ),
       child: Column(
         children: [
@@ -159,8 +167,9 @@ class _VehicleMapScreenState extends State<VehicleMapScreen> {
             width: 60,
             height: 6,
             decoration: BoxDecoration(
-                color: Colors.grey.shade300,
-                borderRadius: BorderRadius.circular(6)),
+              color: Colors.grey.shade300,
+              borderRadius: BorderRadius.circular(6),
+            ),
           ),
           const SizedBox(height: 12),
 
@@ -170,22 +179,29 @@ class _VehicleMapScreenState extends State<VehicleMapScreen> {
               Container(
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                    color: Colors.brown.shade200,
-                    borderRadius: BorderRadius.circular(10)),
-                child:
-                const Icon(Icons.directions_car, color: Colors.white),
+                  color: Colors.brown.shade200,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const Icon(Icons.directions_car, color: Colors.white),
               ),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(v.vehicleNo,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.w800, fontSize: 16)),
+                    Text(
+                      v.vehicleNo,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w800,
+                        fontSize: 16,
+                      ),
+                    ),
                     const SizedBox(height: 4),
-                    Text(v.location,
-                        maxLines: 2, overflow: TextOverflow.ellipsis),
+                    Text(
+                      v.location,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ],
                 ),
               ),
@@ -198,8 +214,9 @@ class _VehicleMapScreenState extends State<VehicleMapScreen> {
           // Odometer / icons row
           Card(
             elevation: 0,
-            shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
               child: Column(
@@ -210,26 +227,32 @@ class _VehicleMapScreenState extends State<VehicleMapScreen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text("Total Odometer",
-                              style:
-                              TextStyle(fontWeight: FontWeight.w600)),
+                          const Text(
+                            "Total Odometer",
+                            style: TextStyle(fontWeight: FontWeight.w600),
+                          ),
                           const SizedBox(height: 6),
                           Row(
                             children: v.odometerDigits
-                                .map((d) => Container(
-                              margin:
-                              const EdgeInsets.only(right: 6.0),
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 6),
-                              decoration: BoxDecoration(
-                                color: Colors.grey.shade100,
-                                borderRadius:
-                                BorderRadius.circular(8),
-                              ),
-                              child: Text(d,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.w700)),
-                            ))
+                                .map(
+                                  (d) => Container(
+                                    margin: const EdgeInsets.only(right: 6.0),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 8,
+                                      vertical: 6,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey.shade100,
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: Text(
+                                      d,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  ),
+                                )
                                 .toList(),
                           ),
                         ],
@@ -238,12 +261,18 @@ class _VehicleMapScreenState extends State<VehicleMapScreen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          const Text("Today KM",
-                              style: TextStyle(fontWeight: FontWeight.w600)),
+                          const Text(
+                            "Today KM",
+                            style: TextStyle(fontWeight: FontWeight.w600),
+                          ),
                           const SizedBox(height: 6),
-                          Text("${v.todayKm.toStringAsFixed(2)} km",
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.w800, fontSize: 14)),
+                          Text(
+                            "${v.todayKm.toStringAsFixed(2)} km",
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w800,
+                              fontSize: 14,
+                            ),
+                          ),
                         ],
                       ),
                     ],
@@ -258,8 +287,10 @@ class _VehicleMapScreenState extends State<VehicleMapScreen> {
                       const Icon(Icons.location_on, color: Colors.brown),
                       const SizedBox(width: 8),
                       Expanded(
-                        child: Text(v.location,
-                            style: const TextStyle(fontSize: 13)),
+                        child: Text(
+                          v.location,
+                          style: const TextStyle(fontSize: 13),
+                        ),
                       ),
                     ],
                   ),
@@ -300,13 +331,15 @@ class _VehicleMapScreenState extends State<VehicleMapScreen> {
                   width: 60,
                   height: 60,
                   decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(8),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.black.withOpacity(0.03),
-                            blurRadius: 6)
-                      ]),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.03),
+                        blurRadius: 6,
+                      ),
+                    ],
+                  ),
                   child: const Center(child: Icon(Icons.bar_chart)),
                 ),
                 const SizedBox(width: 12),
@@ -314,12 +347,18 @@ class _VehicleMapScreenState extends State<VehicleMapScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
-                      Text("36.32 km",
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w700)),
+                      Text(
+                        "36.32 km",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
                       SizedBox(height: 6),
-                      Text("Running 01:19:07 hrs • Stop 01:19:07 hrs",
-                          style: TextStyle(color: Colors.black54)),
+                      Text(
+                        "Running 01:19:07 hrs • Stop 01:19:07 hrs",
+                        style: TextStyle(color: Colors.black54),
+                      ),
                     ],
                   ),
                 ),
@@ -350,8 +389,10 @@ class _VehicleMapScreenState extends State<VehicleMapScreen> {
         children: [
           Text(label, style: const TextStyle(color: Colors.black54)),
           const SizedBox(height: 6),
-          Text(value,
-              style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 14)),
+          Text(
+            value,
+            style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 14),
+          ),
         ],
       ),
     );
@@ -377,7 +418,11 @@ class _VehicleMapScreenState extends State<VehicleMapScreen> {
             ),
           ),
           const SizedBox(height: 6),
-          Text(title, textAlign: TextAlign.center, style: const TextStyle(fontSize: 12)),
+          Text(
+            title,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 12),
+          ),
         ],
       ),
     );
@@ -393,7 +438,10 @@ class _VehicleMapScreenState extends State<VehicleMapScreen> {
           maximum: 140,
           showTicks: false,
           showLabels: false,
-          axisLineStyle: const AxisLineStyle(thickness: 0.12, cornerStyle: CornerStyle.bothFlat),
+          axisLineStyle: const AxisLineStyle(
+            thickness: 0.12,
+            cornerStyle: CornerStyle.bothFlat,
+          ),
           pointers: <GaugePointer>[
             NeedlePointer(
               value: speed,
@@ -404,11 +452,23 @@ class _VehicleMapScreenState extends State<VehicleMapScreen> {
             ),
           ],
           ranges: <GaugeRange>[
-            GaugeRange(startValue: 0, endValue: 50, color: Colors.green.withOpacity(0.7)),
-            GaugeRange(startValue: 50, endValue: 90, color: Colors.orange.withOpacity(0.8)),
-            GaugeRange(startValue: 90, endValue: 140, color: Colors.red.withOpacity(0.9)),
+            GaugeRange(
+              startValue: 0,
+              endValue: 50,
+              color: Colors.green.withOpacity(0.7),
+            ),
+            GaugeRange(
+              startValue: 50,
+              endValue: 90,
+              color: Colors.orange.withOpacity(0.8),
+            ),
+            GaugeRange(
+              startValue: 90,
+              endValue: 140,
+              color: Colors.red.withOpacity(0.9),
+            ),
           ],
-        )
+        ),
       ],
     );
   }
@@ -454,9 +514,7 @@ class _VehicleMapScreenState extends State<VehicleMapScreen> {
                   return false;
                 },
                 child: Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.transparent,
-                  ),
+                  decoration: const BoxDecoration(color: Colors.transparent),
                   child: SingleChildScrollView(
                     controller: scrollController,
                     child: Column(
@@ -466,7 +524,9 @@ class _VehicleMapScreenState extends State<VehicleMapScreen> {
                         _buildCompactCard(),
                         const SizedBox(height: 12),
                         // Expanded area content - put inside a container so it appears white and rounded
-                        _buildExpandedContent(MediaQuery.of(context).size.height * 0.7),
+                        _buildExpandedContent(
+                          MediaQuery.of(context).size.height * 0.7,
+                        ),
                         // add some bottom padding to allow full expansion space
                         SizedBox(height: 20),
                       ],
@@ -481,8 +541,6 @@ class _VehicleMapScreenState extends State<VehicleMapScreen> {
     );
   }
 }
-
-
 
 /// Simple data model for demo
 class VehicleData {

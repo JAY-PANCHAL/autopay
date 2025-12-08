@@ -7,5 +7,5 @@ import '../network/api/smart_track_repository.dart';
 class BaseController extends GetxController {
   var isLoading = false.obs;
   final StorageService storageService = StorageService();
-  final repo = getIt.get<SmartTrackRepository>();
+  final repo = getIt.get<AutomapRepository>();
 }

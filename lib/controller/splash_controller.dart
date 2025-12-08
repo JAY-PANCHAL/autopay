@@ -8,6 +8,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../common/service_locator.dart';
+import '../common/utils/app_constants.dart';
 import '../common/utils/dimensions.dart';
 import '../common/utils/storage_service.dart';
 import '../common/utils/utility.dart';
@@ -17,15 +18,16 @@ import 'base_controller.dart';
 
 
 class SplashController extends BaseController {
-  final repo = getIt.get<SmartTrackRepository>();
+  final repo = getIt.get<AutomapRepository>();
   final StorageService storageService = StorageService();
   var version = "".obs;
 
   @override
   Future<void> onInit() async {
-    splashTimer();
+    tokenApi();
     super.onInit();
   }
+
 
   Future<bool> requestStoragePermission() async {
     var status = await Permission.storage.status;
@@ -57,6 +59,39 @@ class SplashController extends BaseController {
       } else {
         Get.offNamedUntil(Routes.getstarted, (route) => false);
       }
+    });
+  }
+
+
+  Future tokenApi() async {
+    var params = {
+      AppConstants.dbK: AppConstants.dbname,
+      AppConstants.login: AppConstants.loginValue,
+      AppConstants.passwordK: AppConstants.passWordValue,
+
+    };
+    print(params);
+    isLoading.value = true;
+    await repo.token(params).then((value) async {
+      isLoading.value = false;
+      if (value.data?.token!="") {
+        storageService.setString(AppConstants.tokenPr, value.data?.token);
+        storageService.setInt(AppConstants.userTypePr, value.data?.userType);
+        storageService.setInt(AppConstants.userIDPr, value.data?.uid);
+        var isloggedin = await Utils.isLoggedIn();
+        // Get.offNamedUntil(Routes.login, (route) => false);
+        if (isloggedin) {
+          Get.offNamedUntil(Routes.homeScreen, (route) => false);
+        } else {
+          Get.offNamedUntil(Routes.getstarted, (route) => false);
+        }
+      } else {
+      Utils.showToast("Something went wrong!");
+      }
+
+      }).onError((error, stackTrace) {
+      isLoading.value = false;
+      Utils.showToast(error.toString());
     });
   }
 }

@@ -7,14 +7,30 @@ import '../../common/utils/storage_service.dart';
 import '../../routes/app_pages.dart';
 import '../constant/endpoints.dart';
 import '../dio/dio_exception.dart';
+import '../model/token_model.dart';
 
 
-class SmartTrackRepository {
-  final SmartTrackApi smartTrackApi;
+class AutomapRepository {
+  final AutomapApi automapApi;
   final storageService = StorageService();
 
-  SmartTrackRepository(this.smartTrackApi);
-
+  AutomapRepository(this.automapApi);
+  Future<TokenModel> token(params) async {
+    try {
+      final response = await automapApi.loadGetDataWithParams(
+        Endpoints.token,
+        params,""
+      );
+      return TokenModel.fromJson(response.data);
+    } on DioError catch (e) {
+      final errorMessage = DioExceptions.fromDioError(e).toString();
+      if (errorMessage == "Bad request") {
+        // await StorageService().clearData();
+        // gets.Get.offAllNamed(Routes.login);
+      }
+      throw errorMessage;
+    }
+  }
  /* Future<LoginModel> login(params) async {
     try {
       final response = await smartTrackApi.loadPostData(
