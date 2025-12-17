@@ -1,4 +1,5 @@
 import 'package:autopay/network/api/smart_track_api.dart';
+import 'package:autopay/network/model/signup_Distributor_model.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' as gets;
 
@@ -31,6 +32,24 @@ class AutomapRepository {
       throw errorMessage;
     }
   }
+
+  Future<SignupDistibutorModel> signupDistributor(params,token) async {
+    try {
+      final response = await automapApi.loadPostDataToken(
+          Endpoints.token,
+          params,token
+      );
+      return SignupDistibutorModel.fromJson(response.data);
+    } on DioError catch (e) {
+      final errorMessage = DioExceptions.fromDioError(e).toString();
+      if (errorMessage == "Bad request") {
+        // await StorageService().clearData();
+        // gets.Get.offAllNamed(Routes.login);
+      }
+      throw errorMessage;
+    }
+  }
+
  /* Future<LoginModel> login(params) async {
     try {
       final response = await smartTrackApi.loadPostData(

@@ -160,7 +160,7 @@ class _SignupDistributorScreenState extends State<SignupDistributorScreen> {
                       SizedBox(height: 12.sp),
 
                       // Password
-                      Obx(() => TextFormField(
+                        Obx(() => TextFormField(
                         controller: controller.passwordController,
                         obscureText: !controller.isPasswordVisible.value,
                         decoration: InputDecoration(
