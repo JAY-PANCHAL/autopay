@@ -16,7 +16,7 @@ class AutomapApi {
     Dio dio = new Dio();
     dio.options.contentType = Headers.formUrlEncodedContentType;
     dio.options.headers["Content-Type"] = "multipart/form-data";
-    dio.options.headers["x-access-token"] = token;
+    dio.options.headers["Token"] = token;
 
     try {
       final Response response = await dioClient.post(endpoint,
@@ -47,7 +47,7 @@ class AutomapApi {
   Future<Response> loadGetData(endpoint, token) async {
     try {
       final Map<String, dynamic> header = new Map<String, dynamic>();
-      header["x-access-token"] = token;
+      header["Token"] = token;
       final Response response = await dioClient.get(endpoint,
           options: Options(contentType: 'application/json', headers: header));
       Map<String, dynamic> data = response.data;
@@ -60,7 +60,7 @@ class AutomapApi {
   Future<Response> loadGetDataWithParams(endpoint, params, token) async {
     try {
       final Map<String, dynamic> header = new Map<String, dynamic>();
-      header["x-access-token"] = token;
+      header["Token"] = token;
       final Response response = await dioClient.get(endpoint,
           queryParameters: params, options: Options(headers: header));
       Map<String, dynamic> data = response.data;
@@ -92,7 +92,7 @@ class AutomapApi {
   Future<Response> loadGetDataWithOutParams(endpoint, token) async {
     try {
       Dio dio = new Dio();
-      dio.options.headers["x-access-token"] = token;
+      dio.options.headers["Token"] = token;
       final Map<String, dynamic> header = new Map<String, dynamic>();
       header["token"] = token;
 
@@ -121,7 +121,7 @@ class AutomapApi {
 
   Future<Response> loadPostDataToken(endpoint, params, token) async {
     final Map<String, dynamic> header = new Map<String, dynamic>();
-    header["x-access-token"] = token;
+    header["Token"] = token;
 
     try {
       final Response response = await dioClient.post(endpoint,
@@ -160,7 +160,7 @@ class AutomapApi {
 
   Future<Response> loadPostDataJsonType(endpoint, params, token) async {
     final Map<String, dynamic> header = new Map<String, dynamic>();
-    header["x-access-token"] = token;
+    header["Token"] = token;
 
     try {
       final Response response = await dioClient.post(endpoint,

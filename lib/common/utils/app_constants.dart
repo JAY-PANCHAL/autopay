@@ -58,6 +58,7 @@ class AppConstants {
   static const String tokenPr = 'tokenPr';
   static const String isLoggedIn = 'isLoggedInPr';
   static const String userCodePr = 'isuserCodePr';
+  static const String countriespr = "countriespr";
 
   static const String sessionCodePr = 'issessionCodePr';
   static const String subProcessCodePr = 'subProcessCodePr';

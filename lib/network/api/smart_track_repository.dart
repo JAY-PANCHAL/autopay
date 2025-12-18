@@ -8,6 +8,8 @@ import '../../common/utils/storage_service.dart';
 import '../../routes/app_pages.dart';
 import '../constant/endpoints.dart';
 import '../dio/dio_exception.dart';
+import '../model/country_model.dart';
+import '../model/login_model.dart';
 import '../model/token_model.dart';
 
 
@@ -40,6 +42,40 @@ class AutomapRepository {
           params,token
       );
       return SignupDistibutorModel.fromJson(response.data);
+    } on DioError catch (e) {
+      final errorMessage = DioExceptions.fromDioError(e).toString();
+      if (errorMessage == "Bad request") {
+        // await StorageService().clearData();
+        // gets.Get.offAllNamed(Routes.login);
+      }
+      throw errorMessage;
+    }
+  }
+
+  Future<LoginModel> login(params) async {
+    try {
+      final response = await automapApi.loadPostData(
+        Endpoints.login,
+        params,
+      );
+      return LoginModel.fromJson(response.data);
+    } on DioError catch (e) {
+      final errorMessage = DioExceptions.fromDioError(e).toString();
+      if (errorMessage == "Bad request") {
+        // await StorageService().clearData();
+        // gets.Get.offAllNamed(Routes.login);
+      }
+      throw errorMessage;
+    }
+  }
+
+  Future<CountryModel> countryApiCall(token) async {
+    try {
+      final response = await automapApi.loadGetData(
+        Endpoints.countries,
+        token,
+      );
+      return CountryModel.fromJson(response.data);
     } on DioError catch (e) {
       final errorMessage = DioExceptions.fromDioError(e).toString();
       if (errorMessage == "Bad request") {

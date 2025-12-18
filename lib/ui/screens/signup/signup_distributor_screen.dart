@@ -8,14 +8,14 @@ import '../../../common/utils/color_constants.dart';
 import '../../../common/utils/image_paths.dart';
 import '../../../common/utils/utility.dart';
 import '../../../controller/signup_distributor_controller.dart';
-
+import '../../../network/model/country_model.dart';
 
 class SignupDistributorScreen extends StatefulWidget {
-
   SignupDistributorScreen({super.key});
 
   @override
-  State<SignupDistributorScreen> createState() => _SignupDistributorScreenState();
+  State<SignupDistributorScreen> createState() =>
+      _SignupDistributorScreenState();
 }
 
 class _SignupDistributorScreenState extends State<SignupDistributorScreen> {
@@ -48,7 +48,7 @@ class _SignupDistributorScreenState extends State<SignupDistributorScreen> {
                 children: [
                   Utils.addHGap(10),
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       Get.back();
                     },
                     child: Container(
@@ -121,15 +121,21 @@ class _SignupDistributorScreenState extends State<SignupDistributorScreen> {
                           CircleAvatar(
                             radius: 40,
                             backgroundColor: Colors.grey[200],
-                            child: Icon(Icons.camera_alt,
-                                color: Colors.grey[500], size: 30),
+                            child: Icon(
+                              Icons.camera_alt,
+                              color: Colors.grey[500],
+                              size: 30,
+                            ),
                           ),
                           SizedBox(height: 8),
-                          Text("Upload Photo",
-                              style: Styles.textFontRegular(
-                                weight: FontWeight.w500,
-                                  size: 12,
-                                  color: Colors.black.withOpacity(0.6))),
+                          Text(
+                            "Upload Photo",
+                            style: Styles.textFontRegular(
+                              weight: FontWeight.w500,
+                              size: 12,
+                              color: Colors.black.withOpacity(0.6),
+                            ),
+                          ),
                         ],
                       ),
 
@@ -139,48 +145,89 @@ class _SignupDistributorScreenState extends State<SignupDistributorScreen> {
                       Row(
                         children: [
                           Expanded(
-                              child: _buildTextField(
-                                controller.firstNameController,
-                                "Enter Your Name*",
-                                hint: "First Name",
-                              )),
+                            child: _buildTextField(
+                              controller.firstNameController,
+                              "Enter Your Name*",
+                              hint: "First Name",
+                            ),
+                          ),
                           SizedBox(width: 10),
                           Expanded(
-                              child: _buildTextField(
-                                controller.lastNameController,
-                                "",
-                                hint: "Last Name",
-                              )),
+                            child: _buildTextField(
+                              controller.lastNameController,
+                              "",
+                              hint: "Last Name",
+                            ),
+                          ),
                         ],
                       ),
 
                       SizedBox(height: 12.sp),
-                      _buildTextField(controller.userIdController, "User ID*",
-                          hint: "Enter Your User ID"),
+                      _buildTextField(
+                        controller.userIdController,
+                        "User ID*",
+                        hint: "Enter Your User ID",
+                      ),
                       SizedBox(height: 12.sp),
 
                       // Password
-                        Obx(() => TextFormField(
-                        controller: controller.passwordController,
-                        obscureText: !controller.isPasswordVisible.value,
-                        decoration: InputDecoration(
-                          labelText: "Password",
-                          suffixIcon: IconButton(
-                            icon: Icon(controller.isPasswordVisible.value
-                                ? Icons.visibility
-                                : Icons.visibility_off),
-                            onPressed:
-                            controller.togglePasswordVisibility,
+                      Obx(
+                        () => TextFormField(
+                          controller: controller.passwordController,
+                          validator: controller.validatePassword,
+
+                          obscureText: !controller.isPasswordVisible.value,
+                          decoration: InputDecoration(
+                            labelText: "Password",
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                controller.isPasswordVisible.value
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                              ),
+                              onPressed: controller.togglePasswordVisibility,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: 12,
+                            ),
                           ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          contentPadding:
-                          EdgeInsets.symmetric(horizontal: 12),
+                          /*validator: (value) =>
+                        value!.isEmpty ? "Password required" : null,*/
                         ),
-                        validator: (value) =>
-                        value!.isEmpty ? "Password required" : null,
-                      )),
+                      ),
+
+                      SizedBox(height: 12.sp),
+
+                      Obx(
+                        () => TextFormField(
+                          controller: controller.cnfpasswordController,
+                          obscureText: !controller.iscnfPasswordVisible.value,
+                          validator: controller.validatePassword,
+                          decoration: InputDecoration(
+                            labelText: "Confirm Password",
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                controller.iscnfPasswordVisible.value
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                              ),
+                              onPressed: controller.togglecnfPasswordVisibility,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: 12,
+                            ),
+                          ),
+                          /* validator: (value) =>
+                        value!.isEmpty ? "Confirm Password required" : null,
+                    */
+                        ),
+                      ),
 
                       SizedBox(height: 12.sp),
 
@@ -188,12 +235,20 @@ class _SignupDistributorScreenState extends State<SignupDistributorScreen> {
                       Row(
                         children: [
                           Expanded(
-                              child: _buildTextField(controller.cityController,
-                                  "City/Village",
-                                  hint: "Enter Your City/Village")),
+                            child: _buildTextField(
+                              controller.cityController,
+                              "City/Village",
+                              hint: "Enter Your City/Village",
+                            ),
+                          ),
                           SizedBox(width: 10),
-                          Expanded(child:_buildTextField(controller.poController, "PO",
-                              hint: "Enter Your PO")),
+                          Expanded(
+                            child: _buildTextField(
+                              controller.poController,
+                              "PO",
+                              hint: "Enter Your PO",
+                            ),
+                          ),
                         ],
                       ),
 
@@ -202,13 +257,21 @@ class _SignupDistributorScreenState extends State<SignupDistributorScreen> {
                       // Pin / District
                       Row(
                         children: [
-                          Expanded(child:_buildTextField(controller.pinController,
+                          Expanded(
+                            child: _buildTextField(
+                              controller.pinController,
                               "Pin Code",
-                              hint: "Enter Your Pin Code")),
+                              hint: "Enter Your Pin Code",
+                            ),
+                          ),
                           SizedBox(width: 10),
-                          Expanded(child:_buildTextField(controller.districtController,
+                          Expanded(
+                            child: _buildTextField(
+                              controller.districtController,
                               "District",
-                              hint: "Enter Your District")),
+                              hint: "Enter Your District",
+                            ),
+                          ),
                         ],
                       ),
 
@@ -217,52 +280,78 @@ class _SignupDistributorScreenState extends State<SignupDistributorScreen> {
                       // State / Mobile
                       Row(
                         children: [
-                          Expanded(child:_buildTextField(controller.stateController,
+                          Expanded(
+                            flex:1,
+                            child: _buildTextField(
+                              controller.stateController,
                               "State",
-                              hint: "Enter Your State")),
+                              hint: "Enter Your State",
+                            ),
+                          ),
                           SizedBox(width: 10),
-                          Expanded(child:_buildTextField(controller.mobileController,
-                              "Mobile Number",
-                              hint: "Enter Your Mobile Number")),
+
+                          Expanded(
+                              flex: 1,
+                              child: buildCountryDropdown()),
                         ],
                       ),
 
                       SizedBox(height: 12.sp),
 
+                      _buildTextField(
+                        controller.mobileController,
+                        "Mobile Number",
+                        validator: controller.validateMobile,
+                        hint: "Enter Your Mobile Number",
+                      ),
+                      SizedBox(height: 12.sp),
                       // WhatsApp / Email
                       Row(
                         children: [
-                          Expanded(child:_buildTextField(controller.whatsappController,
+                          Expanded(
+                            child: _buildTextField(
+                              controller.whatsappController,
                               "WhatsApp Number",
-                              hint: "Enter WhatsApp Number")),
+                              hint: "Enter WhatsApp Number",
+                            ),
+                          ),
                           SizedBox(width: 10),
-                          Expanded(child:_buildTextField(controller.emailController,
+                          Expanded(
+                            child: _buildTextField(
+                              controller.emailController,
                               "Email Id",
-                              hint: "Enter Email ID")),
+                              validator: controller.validateEmail,
+
+                              hint: "Enter Email ID",
+                            ),
+                          ),
                         ],
                       ),
 
                       SizedBox(height: 12.sp),
 
                       // Terms Checkbox
-                      Obx(() => Row(
-                        children: [
-                          Checkbox(
-                            value: controller.isTermsAccepted.value,
-                            onChanged: (_) => controller.toggleTerms(),
-                            activeColor: AppColors.blue,
-                          ),
-                          Expanded(
-                            child: Text(
-                              "Terms and Condition Accepted",
-                              style: Styles.textFontRegular(
-                                weight: FontWeight.w500,
-                                  size: 12,
-                                  color: Colors.black.withOpacity(0.7)),
+                      Obx(
+                        () => Row(
+                          children: [
+                            Checkbox(
+                              value: controller.isTermsAccepted.value,
+                              onChanged: (_) => controller.toggleTerms(),
+                              activeColor: AppColors.blue,
                             ),
-                          ),
-                        ],
-                      )),
+                            Expanded(
+                              child: Text(
+                                "Terms and Condition Accepted",
+                                style: Styles.textFontRegular(
+                                  weight: FontWeight.w500,
+                                  size: 12,
+                                  color: Colors.black.withOpacity(0.7),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
 
                       SizedBox(height: 15.sp),
 
@@ -277,8 +366,7 @@ class _SignupDistributorScreenState extends State<SignupDistributorScreen> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                           ),
-                          onPressed: () =>
-                              controller.submitForm(context),
+                          onPressed: () => controller.submitForm(context),
                           child: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -307,25 +395,96 @@ class _SignupDistributorScreenState extends State<SignupDistributorScreen> {
     );
   }
 
-  Widget _buildTextField(TextEditingController controller, String label,
-      {String? hint}) {
-    return TextFormField(
+  Widget buildCountryDropdown() {
+    return Obx(() {
+      return DropdownButtonFormField<Countries>(
+        value: controller.selectedCountry.value,
 
+        // 🔑 CRITICAL FIX
+        isExpanded: true,
+
+        selectedItemBuilder: (context) {
+          return controller.countriesList.map((country) {
+            return Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    country.name ?? "",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(fontSize: 12.sp),
+                  ),
+                ),
+              ],
+            );
+          }).toList();
+        },
+
+        items: controller.countriesList.map((country) {
+          return DropdownMenuItem<Countries>(
+            value: country,
+            child: Text(
+              country.name ?? "",
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+          );
+        }).toList(),
+
+        onChanged: (value) {
+          controller.selectedCountry.value = value;
+        },
+
+        decoration: InputDecoration(
+          labelText: "Country",
+          hintText: "Select Country",
+          hintStyle: TextStyle(fontSize: 10.sp),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          contentPadding:
+          EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+        ),
+
+        validator: (value) {
+          if (value == null) {
+            return "Please select a country";
+          }
+          return null;
+        },
+      );
+    });
+  }
+
+
+  Widget _buildTextField(
+    TextEditingController controller,
+    String label, {
+    String? hint,
+    String? Function(String?)? validator,
+    bool obscureText = false,
+    TextInputType keyboardType = TextInputType.text,
+    int? maxLength,
+  }) {
+    return TextFormField(
       controller: controller,
+      obscureText: obscureText,
+      keyboardType: keyboardType,
+      maxLength: maxLength,
       decoration: InputDecoration(
         labelText: label.isNotEmpty ? label : null,
         hintText: hint,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
         contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       ),
-      validator: (value) {
-        if (value == null || value.trim().isEmpty) {
-          return "Required";
-        }
-        return null;
-      },
+      validator:
+          validator ??
+          (value) {
+            if (value == null || value.trim().isEmpty) {
+              return "Required";
+            }
+            return null;
+          },
     );
   }
 }

@@ -12,6 +12,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import '../../network/model/country_model.dart';
 import '../../routes/app_pages.dart';
 import 'Styles.dart';
 import 'app_constants.dart';
@@ -154,6 +155,16 @@ class Utils {
     return false;
   }
 */
+ static  Future<List<Countries>> getCountriesFromStorage() async {
+    final jsonString = await StorageService().getString(AppConstants.countriespr);
+
+    if (jsonString.isEmpty) {
+      return [];
+    }
+
+    final List decoded = jsonDecode(jsonString);
+    return decoded.map((e) => Countries.fromJson(e)).toList();
+  }
 
   static String getCurrentTimeFormatted() {
     DateTime now = DateTime.now();
@@ -208,8 +219,8 @@ class Utils {
           ),
         ),
       )*/
-          LoadingAnimationWidget.bouncingBall(
-        color: AppColors.primaryAppColor,
+          LoadingAnimationWidget.inkDrop(
+        color: AppColors.appblue,
         size: 60,
       ),
     );

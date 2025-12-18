@@ -13,5 +13,9 @@ class Endpoints {
   final StorageService storageService = StorageService();
   static const String token = 'request/token';
 
-  static const String singup = 'user/registration';
+  static const String singup = 'api/user/registration ';
+  static const String login = 'api/login';
+  static const String countries = "api/countries";
+  static const String states = "api/states";
+
 }

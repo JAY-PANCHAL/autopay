@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../common/utils/app_constants.dart';
 import '../common/utils/utility.dart';
+import '../network/model/country_model.dart';
 
 class SignupDistributorController extends BaseController {
   // Form key
@@ -14,6 +15,8 @@ class SignupDistributorController extends BaseController {
   final lastNameController = TextEditingController();
   final userIdController = TextEditingController();
   final passwordController = TextEditingController();
+  final cnfpasswordController = TextEditingController();
+
   final cityController = TextEditingController();
   final poController = TextEditingController();
   final pinController = TextEditingController();
@@ -25,27 +28,110 @@ class SignupDistributorController extends BaseController {
 
   var isTermsAccepted = false.obs;
   var isPasswordVisible = false.obs;
+  var iscnfPasswordVisible = false.obs;
+  var selectedCountry = Rxn<Countries>();
+  var countriesList = <Countries>[].obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    loadCountries();
+  }
+
+  void loadCountries() async {
+    final list = await Utils.getCountriesFromStorage();
+    countriesList.assignAll(list);
+  }
 
   void toggleTerms() => isTermsAccepted.value = !isTermsAccepted.value;
+
   void togglePasswordVisibility() =>
       isPasswordVisible.value = !isPasswordVisible.value;
 
-  void submitForm(BuildContext context) {
-    if (formKey.currentState!.validate()) {
-      if (!isTermsAccepted.value) {
-        Get.snackbar('Error', 'Please accept Terms and Conditions',
-            snackPosition: SnackPosition.BOTTOM);
-        return;
-      }
-      // TODO: Handle API call for sign up
-      Get.snackbar('Success', 'Form submitted successfully!',
-          snackPosition: SnackPosition.BOTTOM);
+  void togglecnfPasswordVisibility() =>
+      iscnfPasswordVisible.value = !iscnfPasswordVisible.value;
+
+  String? validateEmail(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'Email is required';
     }
+    if (!GetUtils.isEmail(value.trim())) {
+      return 'Enter a valid email address';
+    }
+    return null;
+  }
+
+  String? validateMobile(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'Mobile number is required';
+    }
+    if (!GetUtils.isPhoneNumber(value.trim()) || value.trim().length != 10) {
+      return 'Enter a valid 10-digit mobile number';
+    }
+    return null;
+  }
+
+  String? validatePassword(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Password is required';
+    }
+    if (value.length < 6) {
+      return 'Password must be at least 6 characters';
+    }
+    return null;
+  }
+
+  String? validateConfirmPassword(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Confirm password is required';
+    }
+    if (value != passwordController.text) {
+      return 'Passwords do not match';
+    }
+    return null;
+  }
+
+  void submitForm(BuildContext context) {
+    FocusScope.of(context).unfocus(); // hide keyboard
+
+    if (!formKey.currentState!.validate()) {
+      return; // stop if any field invalid
+    }
+
+    if (!isTermsAccepted.value) {
+      Get.snackbar(
+        'Error',
+        'Please accept Terms and Conditions',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      return;
+    }
+
+    // ✅ Extra safety checks (optional but recommended)
+    if (mobileController.text.trim().length != 10) {
+      Get.snackbar(
+        'Error',
+        'Invalid mobile number',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      return;
+    }
+
+    if (passwordController.text != cnfpasswordController.text) {
+      Get.snackbar(
+        'Error',
+        'Passwords do not match',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      return;
+    }
+
+    // ✅ All validations passed → API call
+    signupDistributorApiCall(referralCode: "");
   }
 
   @override
   void onClose() {
-    // Dispose controllers
     firstNameController.dispose();
     lastNameController.dispose();
     userIdController.dispose();
@@ -61,10 +147,7 @@ class SignupDistributorController extends BaseController {
     super.onClose();
   }
 
-
-  Future<void> signupDistributorApiCall({
-    required String referralCode,
-  }) async {
+  Future<void> signupDistributorApiCall({required String referralCode}) async {
     final params = {
       "user_type": "distributor",
       "firstname": firstNameController.text.trim(),
@@ -88,28 +171,25 @@ class SignupDistributorController extends BaseController {
 
     isLoading.value = true;
 
+    var token = storageService.getString(AppConstants.tokenPr);
 
-    var token= storageService.getString(AppConstants.tokenPr);
-
-
-      await repo.signupDistributor(params,token).then((value) async {
-        isLoading.value = false;
-        if (value.success == 1 && value.data != null) {
-          // ✅ Success case
-          Utils.showToast(value.data!.message ?? "Signup successful");
-
-
-
-        } else {
-          // ❌ API responded but failed
-          Utils.showToast(
-            value.data?.message ?? "Signup failed. Please try again.",
-          );
-        }
-      }).onError((error, stackTrace) {
-        isLoading.value = false;
-        Utils.showToast(error.toString());
-      });
-
+    await repo
+        .signupDistributor(params, token)
+        .then((value) async {
+          isLoading.value = false;
+          if (value.success == 1 && value.data != null) {
+            // ✅ Success case
+            Utils.showToast(value.data!.message ?? "Signup successful");
+          } else {
+            // ❌ API responded but failed
+            Utils.showToast(
+              value.data?.message ?? "Signup failed. Please try again.",
+            );
+          }
+        })
+        .onError((error, stackTrace) {
+          isLoading.value = false;
+          Utils.showToast(error.toString());
+        });
   }
 }
