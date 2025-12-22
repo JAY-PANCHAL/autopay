@@ -280,19 +280,18 @@ class _SignupDistributorScreenState extends State<SignupDistributorScreen> {
                       // State / Mobile
                       Row(
                         children: [
+                          Expanded(flex: 1, child: buildCountryDropdown()),
+
+                          SizedBox(width: 10),
+
                           Expanded(
-                            flex:1,
+                            flex: 1,
                             child: _buildTextField(
                               controller.stateController,
                               "State",
                               hint: "Enter Your State",
                             ),
                           ),
-                          SizedBox(width: 10),
-
-                          Expanded(
-                              flex: 1,
-                              child: buildCountryDropdown()),
                         ],
                       ),
 
@@ -439,11 +438,8 @@ class _SignupDistributorScreenState extends State<SignupDistributorScreen> {
           labelText: "Country",
           hintText: "Select Country",
           hintStyle: TextStyle(fontSize: 10.sp),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          contentPadding:
-          EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+          contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 12),
         ),
 
         validator: (value) {
@@ -455,7 +451,6 @@ class _SignupDistributorScreenState extends State<SignupDistributorScreen> {
       );
     });
   }
-
 
   Widget _buildTextField(
     TextEditingController controller,
