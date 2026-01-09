@@ -17,7 +17,7 @@ class LoginController extends BaseController {
 
   var formKey = GlobalKey<FormState>();
   var otpValue = "".obs;
-  final mobileController = TextEditingController();
+  final userIDController = TextEditingController();
   final isPasswordVisible = false.obs;
   final rememberMe = false.obs;
 
@@ -40,7 +40,7 @@ class LoginController extends BaseController {
     Get.toNamed(Routes.otpVerification);
 
     if (userNameController.text.isEmpty) {
-      Utils.showToast(AppConstants.errorUsername);
+      Utils.showToast(AppConstants.errorUserID);
     } else if (passwordController.text.isEmpty) {
       Utils.showToast(AppConstants.errorPassword);
     } else {

@@ -12,17 +12,18 @@ import '../model/country_model.dart';
 import '../model/login_model.dart';
 import '../model/token_model.dart';
 
-
 class AutomapRepository {
   final AutomapApi automapApi;
   final storageService = StorageService();
 
   AutomapRepository(this.automapApi);
+
   Future<TokenModel> token(params) async {
     try {
       final response = await automapApi.loadGetDataWithParams(
         Endpoints.token,
-        params,""
+        params,
+        "",
       );
       return TokenModel.fromJson(response.data);
     } on DioError catch (e) {
@@ -35,11 +36,12 @@ class AutomapRepository {
     }
   }
 
-  Future<SignupDistibutorModel> signupDistributor(params,token) async {
+  Future<SignupDistibutorModel> signupDistributor(params, token) async {
     try {
       final response = await automapApi.loadPostDataToken(
-          Endpoints.token,
-          params,token
+        Endpoints.singup,
+        params,
+        token,
       );
       return SignupDistibutorModel.fromJson(response.data);
     } on DioError catch (e) {
@@ -51,13 +53,26 @@ class AutomapRepository {
       throw errorMessage;
     }
   }
-
+  Future<SignupDistibutorModel> signupDealer(params, token) async {
+    try {
+      final response = await automapApi.loadPostDataToken(
+        Endpoints.singup,
+        params,
+        token,
+      );
+      return SignupDistibutorModel.fromJson(response.data);
+    } on DioError catch (e) {
+      final errorMessage = DioExceptions.fromDioError(e).toString();
+      if (errorMessage == "Bad request") {
+        // await StorageService().clearData();
+        // gets.Get.offAllNamed(Routes.login);
+      }
+      throw errorMessage;
+    }
+  }
   Future<LoginModel> login(params) async {
     try {
-      final response = await automapApi.loadPostData(
-        Endpoints.login,
-        params,
-      );
+      final response = await automapApi.loadPostData(Endpoints.login, params);
       return LoginModel.fromJson(response.data);
     } on DioError catch (e) {
       final errorMessage = DioExceptions.fromDioError(e).toString();
@@ -71,8 +86,23 @@ class AutomapRepository {
 
   Future<CountryModel> countryApiCall(token) async {
     try {
-      final response = await automapApi.loadGetData(
-        Endpoints.countries,
+      final response = await automapApi.loadGetData(Endpoints.countries, token);
+      return CountryModel.fromJson(response.data);
+    } on DioError catch (e) {
+      final errorMessage = DioExceptions.fromDioError(e).toString();
+      if (errorMessage == "Bad request") {
+        // await StorageService().clearData();
+        // gets.Get.offAllNamed(Routes.login);
+      }
+      throw errorMessage;
+    }
+  }
+
+  Future<CountryModel> statesApiCall(params, token) async {
+    try {
+      final response = await automapApi.loadGetDataWithParams(
+        Endpoints.states,
+        params,
         token,
       );
       return CountryModel.fromJson(response.data);
@@ -86,7 +116,7 @@ class AutomapRepository {
     }
   }
 
- /* Future<LoginModel> login(params) async {
+  /* Future<LoginModel> login(params) async {
     try {
       final response = await smartTrackApi.loadPostData(
         Endpoints.login,

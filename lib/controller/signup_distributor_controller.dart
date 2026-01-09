@@ -192,4 +192,32 @@ class SignupDistributorController extends BaseController {
           Utils.showToast(error.toString());
         });
   }
+
+  Future<void> statesApiCall(countryid) async {
+    isLoading.value = true;
+
+    var token = await storageService.getString(AppConstants.tokenPr);
+    var params = {"country_id": countryid};
+    await repo
+        .statesApiCall(params, token)
+        .then((value) async {
+          isLoading.value = false;
+          if (value.success == 1 && value.data?.countries != null) {
+            // ✅ Success case
+            Utils.showToast(
+              value.data!.message ?? "states fetched successfully",
+            );
+          } else {
+            // ❌ API responded but failed
+            Utils.showToast(
+              value.data?.message ??
+                  "states fetch failed. Please try again.",
+            );
+          }
+        })
+        .onError((error, stackTrace) {
+          isLoading.value = false;
+          Utils.showToast(error.toString());
+        });
+  }
 }

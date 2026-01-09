@@ -132,9 +132,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
                         SizedBox(height: 30.sp),
                         _buildTextField(
-                          controller.mobileController,
-                          "Mobile Number",
-                          hint: "Enter Your Mobile Number",
+                          controller.userIDController,
+                          "User ID",
+                          hint: "Enter Your UserID",
                         ),
                         SizedBox(height: 12.sp),
                         Obx(

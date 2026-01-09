@@ -34,7 +34,7 @@ class GetStartedController extends BaseController {
       if (value.success == 1 && value.data?.countries != null) {
         saveCountriesToStorage(value.data!.countries!);
         // ✅ Success case
-        Utils.showToast(value.data!.message ?? "Counties fetched successfully");
+        Utils.showToast(value.data!.message ?? "Countries fetched successfully");
       } else {
         // ❌ API responded but failed
         Utils.showToast(

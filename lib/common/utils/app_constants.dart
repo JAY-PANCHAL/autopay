@@ -79,5 +79,7 @@ class AppConstants {
   static const String errorEmail = "Please enter email";
   static const String errorPhone = "Please enter phone number";
   static const String errorUsername = "Please enter user name";
+  static const String errorUserID = "Please enter user Id                                                             ";
+
   static const String errorPassword = "Please enter password";
 }
